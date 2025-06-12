@@ -466,7 +466,7 @@ export const SENTENCE_PATTERNS: SentencePattern[] = [
   // Simple imperatives
   { name: "Verb-Noun", structure: [['Verb', 'Noun']] }, // e.g. Eat food
   { name: "Verb-Pronoun", structure: [['Verb', 'Pronoun']] }, // e.g. Help them
-  { name: "Verb-Adjective", structure: [['Verb', 'Adjective']] }, // e.g. Be happy
+  // { name: "Verb-Adjective", structure: [['Verb', 'Adjective']] }, // e.g. Be happy -- REMOVED to make "Enjoy Heavy" invalid
 
   // Two-word sentences
   { name: "Noun-Verb", structure: [['Noun', 'Verb']] }, // Birds fly
