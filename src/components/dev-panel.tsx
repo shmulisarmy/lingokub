@@ -86,7 +86,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
                   <SelectValue placeholder="Any Category" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">Any Category</SelectItem>
+                  {/* <SelectItem value="">Any Category</SelectItem> Removed this line */}
                   {CATEGORIES.map(category => (
                     <SelectItem key={category} value={category}>
                       {category}
