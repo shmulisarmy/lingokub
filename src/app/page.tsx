@@ -8,7 +8,7 @@ import { GameControls } from '@/components/game-controls';
 import { StatusDisplay } from '@/components/status-display';
 import { AIPanel } from '@/components/ai-panel';
 import type { WordCard as WordCardType, GridCell, SelectedCardInfo } from '@/types';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
 
@@ -20,6 +20,7 @@ export default function LexicaLabyrinthPage() {
     selectCard,
     placeCardOnBoard,
     removeCardFromBoard,
+    returnPlacedCardsToHand,
     drawCard,
     endTurn,
     handleDragStart,
@@ -32,6 +33,14 @@ export default function LexicaLabyrinthPage() {
     document.addEventListener('dragend', dragEndHandler);
     return () => document.removeEventListener('dragend', dragEndHandler);
   }, [setDraggedItem]);
+
+  const hasPlacedCardsThisTurn = useMemo(() => {
+    if (!gameState) return false;
+    const currentPlayerId = gameState.players[gameState.currentPlayerIndex].id;
+    return gameState.gameBoard.some(row => 
+      row.some(cell => cell && cell.isNewThisTurn && cell.placedByPlayerId === currentPlayerId)
+    );
+  }, [gameState]);
 
   if (!gameState) {
     return (
@@ -74,7 +83,14 @@ export default function LexicaLabyrinthPage() {
   const onCellClick = (rowIndex: number, colIndex: number) => {
     const cell = gameBoard[rowIndex][colIndex];
     if (cell) {
-      selectCard({ card: cell, source: 'board', boardCoordinates: { row: rowIndex, col: colIndex } });
+      // If card is already selected and it's the same card, deselect it (optional)
+      if (selectedCardInfo?.source === 'board' && 
+          selectedCardInfo.boardCoordinates?.row === rowIndex && 
+          selectedCardInfo.boardCoordinates?.col === colIndex) {
+        selectCard(null); 
+      } else {
+        selectCard({ card: cell, source: 'board', boardCoordinates: { row: rowIndex, col: colIndex } });
+      }
     } else {
       if (selectedCardInfo) {
         placeCardOnBoard(rowIndex, colIndex);
@@ -83,7 +99,11 @@ export default function LexicaLabyrinthPage() {
   };
 
   const onHandCardSelect = (card: WordCardType, handIndex: number) => {
-    selectCard({ card, source: 'hand', handIndex });
+     if (selectedCardInfo?.source === 'hand' && selectedCardInfo.handIndex === handIndex) {
+      selectCard(null); // Deselect if same hand card is clicked again
+    } else {
+      selectCard({ card, source: 'hand', handIndex });
+    }
   };
   
 
@@ -132,7 +152,9 @@ export default function LexicaLabyrinthPage() {
           onFinishTurn={endTurn}
           onDrawCard={drawCard}
           onNewGame={newGame}
+          onReturnPlacedCards={returnPlacedCardsToHand}
           canFinishTurn={actionsThisTurn > 0 || deck.length === 0}
+          hasPlacedCardsThisTurn={hasPlacedCardsThisTurn}
           isGameWon={isGameWon}
           deckEmpty={deck.length === 0}
         />
@@ -157,3 +179,5 @@ export default function LexicaLabyrinthPage() {
     </div>
   );
 }
+
+    

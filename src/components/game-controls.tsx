@@ -1,15 +1,18 @@
+
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Lightbulb, MessageSquareQuote, Play, RotateCcw, Dices, Brain } from 'lucide-react';
+import { Lightbulb, MessageSquareQuote, Play, RotateCcw, Dices, Brain, Undo2 } from 'lucide-react';
 
 interface GameControlsProps {
   onFinishTurn: () => void;
   onDrawCard: () => void;
   onNewGame: () => void;
-  onGrammarInsight?: () => void; // Optional for now
-  onSentenceSuggestions?: () => void; // Optional for now
+  onReturnPlacedCards: () => void;
+  onGrammarInsight?: () => void;
+  onSentenceSuggestions?: () => void;
   canFinishTurn: boolean;
+  hasPlacedCardsThisTurn: boolean;
   isGameWon: boolean;
   deckEmpty: boolean;
 }
@@ -18,9 +21,11 @@ export function GameControls({
   onFinishTurn,
   onDrawCard,
   onNewGame,
+  onReturnPlacedCards,
   onGrammarInsight,
   onSentenceSuggestions,
   canFinishTurn,
+  hasPlacedCardsThisTurn,
   isGameWon,
   deckEmpty,
 }: GameControlsProps) {
@@ -37,10 +42,19 @@ export function GameControls({
       <Button 
         onClick={onDrawCard} 
         variant="outline" 
-        disabled={isGameWon || deckEmpty}
-        aria-label={deckEmpty ? "Deck is empty" : "Draw Card"}
+        disabled={isGameWon} // Player can always attempt to draw if game not won, even if deck is empty (logic handles it)
+        aria-label={deckEmpty ? "Deck is empty, Draw & End Turn" : "Draw Card & End Turn"}
       >
         <Dices className="mr-2 h-5 w-5" /> Draw Card {deckEmpty && "(Empty)"}
+      </Button>
+       <Button 
+        onClick={onReturnPlacedCards}
+        variant="outline"
+        disabled={!hasPlacedCardsThisTurn || isGameWon}
+        aria-label="Return Placed Cards to Hand"
+        className="border-amber-500 text-amber-700 hover:bg-amber-500/10 dark:text-amber-400 dark:border-amber-600 dark:hover:bg-amber-600/20"
+      >
+        <Undo2 className="mr-2 h-5 w-5" /> Return Cards
       </Button>
       
       {onGrammarInsight && (
@@ -61,3 +75,5 @@ export function GameControls({
     </div>
   );
 }
+
+    

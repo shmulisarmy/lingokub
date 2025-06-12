@@ -25,7 +25,6 @@ function initializeGame(): GameState {
     initialPlayer('player2', 'Player 2'),
   ];
 
-  // Deal cards
   for (let i = 0; i < PLAYER_COUNT; i++) {
     players[i].hand = shuffledDeck.splice(0, INITIAL_HAND_SIZE);
   }
@@ -45,13 +44,12 @@ function initializeGame(): GameState {
 }
 
 export function useGameLogic() {
-  const [gameState, setGameState] = useState<GameState | null>(null); // Initialize with null
+  const [gameState, setGameState] = useState<GameState | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
-    // Initialize game on client-side after mount
     setGameState(initializeGame());
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, []);
 
   const newGame = useCallback(() => {
     setGameState(initializeGame());
@@ -81,39 +79,36 @@ export function useGameLogic() {
           placedByPlayerId: currentPlayer.id,
           validationState: 'neutral',
         };
-
         newBoard[rowIndex][colIndex] = newGridCell;
-
         if (source === 'hand' && handIndex !== undefined) {
           currentPlayer.hand.splice(handIndex, 1);
         } else if (source === 'board' && boardCoordinates) {
           newBoard[boardCoordinates.row][boardCoordinates.col] = null;
         }
         newActionsThisTurn++;
-      } else { // Target cell is occupied - attempt swap
-        if (source === 'board' && boardCoordinates) { // Only swap board-to-board
+      } else {
+        if (source === 'board' && boardCoordinates) {
           const cardToSwap = newBoard[rowIndex][colIndex]!;
           newBoard[rowIndex][colIndex] = { 
             ...card, 
-            isNewThisTurn: true, // Moved card is considered new for this turn's validation
+            isNewThisTurn: true,
             placedByPlayerId: currentPlayer.id,
             validationState: 'neutral'
           };
           newBoard[boardCoordinates.row][boardCoordinates.col] = {
             ...cardToSwap,
-            isNewThisTurn: true, // The swapped card is also 'new' in its new position for this turn
-            placedByPlayerId: cardToSwap.placedByPlayerId, // Keep original placer or update if logic requires
+            isNewThisTurn: true,
+            placedByPlayerId: cardToSwap.placedByPlayerId,
             validationState: 'neutral'
           };
           newActionsThisTurn++;
         } else {
-          toast({ title: "Invalid Move", description: "Cell is occupied. Drag from board to swap.", variant: "destructive" });
+          toast({ title: "Invalid Move", description: "Cell is occupied. Drag from board to swap or place on empty cell.", variant: "destructive" });
           return prev;
         }
       }
       
       const { issues } = validateBoard(newBoard);
-
       return {
         ...prev,
         gameBoard: newBoard,
@@ -143,12 +138,48 @@ export function useGameLogic() {
       player.hand.push({ id: cardToRemove.id, text: cardToRemove.text, categories: cardToRemove.categories });
       
       const { issues } = validateBoard(newBoard);
-
       return {
         ...prev,
         gameBoard: newBoard,
         players: newPlayers,
-        actionsThisTurn: prev.actionsThisTurn > 0 ? prev.actionsThisTurn -1 : 0, 
+        actionsThisTurn: prev.actionsThisTurn > 0 ? prev.actionsThisTurn - 1 : 0, 
+        highlightedIssues: issues,
+      };
+    });
+  }, [toast]);
+
+  const returnPlacedCardsToHand = useCallback(() => {
+    setGameState(prev => {
+      if (!prev) return prev;
+      const currentPlayer = { ...prev.players[prev.currentPlayerIndex], hand: [...prev.players[prev.currentPlayerIndex].hand] };
+      let cardsReturnedCount = 0;
+      
+      const newBoard = prev.gameBoard.map(row =>
+        row.map(cell => {
+          if (cell && cell.isNewThisTurn && cell.placedByPlayerId === currentPlayer.id) {
+            currentPlayer.hand.push({ id: cell.id, text: cell.text, categories: cell.categories });
+            cardsReturnedCount++;
+            return null; 
+          }
+          return cell;
+        })
+      );
+
+      if (cardsReturnedCount === 0) {
+        toast({ title: "No Cards to Return", description: "You haven't placed any cards this turn.", variant: "default" });
+        return prev;
+      }
+      
+      const updatedPlayers = prev.players.map((p, index) => index === prev.currentPlayerIndex ? currentPlayer : p) as [Player, Player];
+      const { issues } = validateBoard(newBoard);
+      toast({ title: "Cards Returned", description: `${cardsReturnedCount} card(s) returned to your hand.` });
+
+      return {
+        ...prev,
+        gameBoard: newBoard,
+        players: updatedPlayers,
+        actionsThisTurn: Math.max(0, prev.actionsThisTurn - cardsReturnedCount),
+        selectedCardInfo: null, 
         highlightedIssues: issues,
       };
     });
@@ -157,23 +188,72 @@ export function useGameLogic() {
   const drawCard = useCallback(() => {
     setGameState(prev => {
       if (!prev) return prev;
-      if (prev.deck.length === 0) {
-        toast({ title: "Deck Empty", description: "No more cards to draw.", variant: "destructive"});
-        return prev;
+
+      const currentPlayerForUpdate = { ...prev.players[prev.currentPlayerIndex], hand: [...prev.players[prev.currentPlayerIndex].hand] };
+      let newBoard = prev.gameBoard.map(row => [...row]);
+      let actionsRevertedCount = 0;
+      let cardsWereReturned = false;
+
+      newBoard = newBoard.map(row =>
+        row.map(cell => {
+          if (cell && cell.isNewThisTurn && cell.placedByPlayerId === currentPlayerForUpdate.id) {
+            currentPlayerForUpdate.hand.push({ id: cell.id, text: cell.text, categories: cell.categories });
+            actionsRevertedCount++;
+            cardsWereReturned = true;
+            return null;
+          }
+          return cell;
+        })
+      );
+
+      if (cardsWereReturned) {
+        toast({ title: "Cards Returned", description: "Your placed cards were returned to hand before drawing." });
+      }
+      
+      let drawnCardMessage = "Card drawn.";
+      const newDeck = [...prev.deck];
+      if (newDeck.length > 0) {
+        const drawnCardItem = newDeck.pop()!;
+        currentPlayerForUpdate.hand.push(drawnCardItem);
+      } else {
+        drawnCardMessage = "Deck is empty. No card drawn.";
+        toast({ title: "Deck Empty", description: "No more cards to draw. Turn ends.", variant: "default" });
       }
 
-      const newDeck = [...prev.deck];
-      const drawnCard = newDeck.pop()!;
+      const updatedPlayers = prev.players.map((p, index) => index === prev.currentPlayerIndex ? currentPlayerForUpdate : p) as [Player, Player];
+      
+      if (currentPlayerForUpdate.hand.length === 0) {
+        toast({ title: "Congratulations!", description: `${currentPlayerForUpdate.name} wins!` });
+        return { 
+          ...prev, 
+          players: updatedPlayers,
+          deck: newDeck,
+          gameBoard: newBoard.map(r => r.map(c => c ? { ...c, isNewThisTurn: false, validationState: 'neutral' } : null)),
+          isGameWon: true, 
+          winner: currentPlayerForUpdate, 
+          highlightedIssues: [],
+          actionsThisTurn: 0, 
+          selectedCardInfo: null,
+          turnMessages: [`${drawnCardMessage} ${currentPlayerForUpdate.name} wins!`],
+        };
+      }
 
-      const newPlayers = prev.players.map(p => ({...p, hand: [...p.hand]})) as [Player, Player];
-      const player = newPlayers[prev.currentPlayerIndex];
-      player.hand.push(drawnCard);
+      const finalBoardAfterDraw = newBoard.map(row =>
+        row.map(cell => cell ? { ...cell, isNewThisTurn: false, validationState: 'neutral' } : null)
+      );
 
+      toast({ title: "Turn Ended", description: `${drawnCardMessage} It's ${prev.players[1 - prev.currentPlayerIndex].name}'s turn.` });
+      
       return {
         ...prev,
-        players: newPlayers,
+        players: updatedPlayers,
         deck: newDeck,
-        actionsThisTurn: prev.actionsThisTurn + 1, 
+        gameBoard: finalBoardAfterDraw,
+        currentPlayerIndex: (1 - prev.currentPlayerIndex) as 0 | 1,
+        actionsThisTurn: 0, 
+        selectedCardInfo: null,
+        turnMessages: [`${prev.players[1 - prev.currentPlayerIndex].name}'s turn.`],
+        highlightedIssues: [],
       };
     });
   }, [toast]);
@@ -181,7 +261,7 @@ export function useGameLogic() {
   const endTurn = useCallback(() => {
     setGameState(prev => {
       if (!prev) return prev;
-      if (prev.actionsThisTurn === 0) {
+      if (prev.actionsThisTurn === 0 && prev.deck.length > 0) { // Allow ending turn if deck is empty even with 0 actions.
         toast({ title: "No Action Taken", description: "You must place, move, or draw a card.", variant: "destructive"});
         return prev;
       }
@@ -244,24 +324,35 @@ export function useGameLogic() {
           validationState: 'neutral',
         };
 
-        if (source === 'hand' || (source === 'board' && !targetCellCurrentContent)) {
+        if (source === 'hand' && !targetCellCurrentContent) { // Placing from hand to empty cell
           newBoard[rowIndex][colIndex] = newGridCellData;
-          if (source === 'hand' && handIndex !== undefined) {
+          if (handIndex !== undefined) {
             currentPlayer.hand.splice(handIndex, 1);
-          } else if (source === 'board' && boardCoordinates) {
-            newBoard[boardCoordinates.row][boardCoordinates.col] = null;
           }
           newActionsThisTurn++;
-        }
-        else if (source === 'board' && boardCoordinates && targetCellCurrentContent) {
-          newBoard[rowIndex][colIndex] = newGridCellData; 
-          newBoard[boardCoordinates.row][boardCoordinates.col] = { 
-            ...targetCellCurrentContent,
-             isNewThisTurn: true, 
-          };
-          newActionsThisTurn++;
+        } else if (source === 'board') { // Moving from board
+          if (!targetCellCurrentContent) { // Moving to empty cell
+            newBoard[rowIndex][colIndex] = newGridCellData;
+            if (boardCoordinates) {
+              newBoard[boardCoordinates.row][boardCoordinates.col] = null;
+            }
+            newActionsThisTurn++; // Count as an action if it's a move to a new spot
+          } else if (boardCoordinates && targetCellCurrentContent) { // Swapping two cards on board
+            newBoard[rowIndex][colIndex] = newGridCellData; 
+            newBoard[boardCoordinates.row][boardCoordinates.col] = { 
+              ...targetCellCurrentContent,
+               isNewThisTurn: true, // The card being moved to original spot is also "new" for this turn
+               placedByPlayerId: targetCellCurrentContent.placedByPlayerId, // Keep original placer or decide if current player "owns" it now
+               validationState: 'neutral',
+            };
+            newActionsThisTurn++;
+          }
+        } else if (source === 'hand' && targetCellCurrentContent) {
+           toast({ title: "Invalid Move", description: "Cannot place card from hand onto an occupied cell. Try swapping from board to board.", variant: "destructive"});
+           return { ...prev, selectedCardInfo: originalSelectedCardInfo || null };
         } else {
-           toast({ title: "Invalid Move", description: "Cannot place card from hand onto an occupied cell.", variant: "destructive"});
+           // Should not happen, but as a fallback
+           toast({ title: "Invalid Drag Action", variant: "destructive"});
            return { ...prev, selectedCardInfo: originalSelectedCardInfo || null };
         }
         
@@ -288,6 +379,7 @@ export function useGameLogic() {
     selectCard,
     placeCardOnBoard,
     removeCardFromBoard,
+    returnPlacedCardsToHand,
     drawCard,
     endTurn,
     handleDragStart,
@@ -296,3 +388,5 @@ export function useGameLogic() {
     setDraggedItem, 
   };
 }
+
+    
