@@ -446,11 +446,16 @@ export const SENTENCE_PATTERNS: SentencePattern[] = [
   { name: "Article-Noun-Verb-Adverb", structure: [['Article', 'Noun', 'Verb', 'Adverb']] }, // The dog runs quickly. A car moved slowly.
   { name: "Pronoun-Adverb-Verb", structure: [['Pronoun', 'Adverb', 'Verb']] }, // I often run. She always smiles.
   { name: "Noun-Adverb-Verb", structure: [['Noun', 'Adverb', 'Verb']] }, // Dogs often run. Stars brightly shine.
+  { name: "Adverb-Verb", structure: [['Adverb', 'Verb']] }, // Often run. Always smile. (Imperative fragment style)
   { name: "Verb-Adverb", structure: [['Verb', 'Adverb']] }, // Run quickly. Speak clearly. (Imperative fragment)
   { name: "Article-Adjective-Noun-Verb-Adverb", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Adverb']] }, // The big dog runs quickly. A small bird sang beautifully.
   { name: "Pronoun-Verb-Noun-Adverb", structure: [['Pronoun', 'Verb', 'Noun', 'Adverb']]}, // I eat food slowly. She did work carefully.
   { name: "Article-Adverb-Adjective-Noun", structure: [['Article', 'Adverb', 'Adjective', 'Noun']] }, // The very big house. An extremely fast car. (Fragment)
   { name: "Adverb-Adjective-Noun", structure: [['Adverb', 'Adjective', 'Noun']] }, // Very happy child. Really good food. (Fragment)
+  { name: "Adverb-Verb-Noun", structure: [['Adverb', 'Verb', 'Noun']]}, // Always seek truth. Often find joy.
+  { name: "Adverb-Verb-Article-Noun", structure: [['Adverb', 'Verb', 'Article', 'Noun']]}, // Quickly eat the apple.
+  { name: "Adverb-Verb-Adjective", structure: [['Adverb', 'Verb', 'Adjective']]}, // Always be kind.
+  { name: "Adverb-Verb-Adverb", structure: [['Adverb', 'Verb', 'Adverb']]}, // Never run carelessly.
 
   // Patterns with Prepositions (S-V-PrepP, N-PrepP)
   { name: "Pronoun-Verb-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Preposition', 'Article', 'Noun']] }, // He ran to the park. She looked at the moon.
@@ -463,7 +468,10 @@ export const SENTENCE_PATTERNS: SentencePattern[] = [
   { name: "Pronoun-Verb-Adverb-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Adverb', 'Preposition', 'Article', 'Noun']]}, // She walked quickly to the store. He looked carefully under the bed.
   { name: "Pronoun-Verb-Noun-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Noun', 'Preposition', 'Article', 'Noun']] }, // I put the book on the table.
   { name: "Article-Noun-Verb-Noun-Preposition-Article-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun', 'Preposition', 'Article', 'Noun']] }, // The girl gave a gift to the boy.
-  
+  { name: "Verb-Noun-Preposition-Noun", structure: [['Verb', 'Noun', 'Preposition', 'Noun']]}, // Put food in bowl.
+  { name: "Noun-Preposition-Article-Noun-Verb", structure: [['Noun', 'Preposition', 'Article', 'Noun', 'Verb']]}, // Cat on the mat sleeps.
+  { name: "Pronoun-Verb-Preposition-Pronoun", structure: [['Pronoun', 'Verb', 'Preposition', 'Pronoun']]}, // I walk with him.
+
   // Patterns with Conjunctions (linking clauses or words)
   { name: "Noun-Verb-Conjunction-Noun-Verb", structure: [['Noun', 'Verb', 'Conjunction', 'Noun', 'Verb']] }, // Dogs bark and cats meow. Sun shines or rain falls.
   { name: "Pronoun-Verb-Conjunction-Pronoun-Verb", structure: [['Pronoun', 'Verb', 'Conjunction', 'Pronoun', 'Verb']] }, // I run and he walks. She reads but they play.
@@ -475,6 +483,8 @@ export const SENTENCE_PATTERNS: SentencePattern[] = [
   { name: "Article-Noun-Verb-Conjunction-Article-Noun-Verb", structure: [['Article', 'Noun', 'Verb', 'Conjunction', 'Article', 'Noun', 'Verb']] }, // The dog barks and the cat sleeps.
   { name: "Adjective-Noun-Conjunction-Adjective-Noun-Verb", structure: [['Adjective', 'Noun', 'Conjunction', 'Adjective', 'Noun', 'Verb']]}, // Red cars and blue boats move.
   { name: "Pronoun-Verb-Noun-Conjunction-Pronoun-Verb-Noun", structure: [['Pronoun', 'Verb', 'Noun', 'Conjunction', 'Pronoun', 'Verb', 'Noun']]}, // I like tea and he likes coffee.
+  { name: "Noun-Verb-Adjective-Conjunction-Noun-Verb-Adjective", structure: [['Noun', 'Verb', 'Adjective', 'Conjunction', 'Noun', 'Verb', 'Adjective']]}, // Day is bright and night is dark.
+  { name: "Verb-Noun-Conjunction-Verb-Noun", structure: [['Verb', 'Noun', 'Conjunction', 'Verb', 'Noun']]}, // Eat food and drink water.
 
   // Simple imperatives / fragments
   { name: "Verb-Noun", structure: [['Verb', 'Noun']] }, // Eat food. Read book.
@@ -510,9 +520,57 @@ export const SENTENCE_PATTERNS: SentencePattern[] = [
   { name: "Pronoun-Verb-Adjective-Noun-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Adjective', 'Noun', 'Preposition', 'Article', 'Noun']] }, // I want a new game for the party.
   { name: "Article-Noun-Verb-Adverb-Preposition-Article-Adjective-Noun", structure: [['Article', 'Noun', 'Verb', 'Adverb', 'Preposition', 'Article', 'Adjective', 'Noun']] }, // The cat jumped quickly over the tall fence.
   { name: "Pronoun-Verb-Conjunction-Verb-Article-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Conjunction', 'Verb', 'Article', 'Adjective', 'Noun']] }, // I will sing and play a happy song.
-  { name: "Noun-Adverb-Verb-Adjective-Conjunction-Noun-Verb-Well", structure: [['Noun', 'Adverb', 'Verb', 'Adjective', 'Conjunction', 'Noun', 'Verb', 'Adverb']] }, // Early birds sing sweetly and late worms sleep soundly. (Adverb 'Well' is just 'Adverb')
+  { name: "Noun-Adverb-Verb-Adjective-Conjunction-Noun-Verb-Adverb", structure: [['Noun', 'Adverb', 'Verb', 'Adjective', 'Conjunction', 'Noun', 'Verb', 'Adverb']] }, // Early birds sing sweetly and late worms sleep soundly.
+  { name: "Pronoun-Verb-Article-Noun-Preposition-Article-Noun-Conjunction-Verb-More", structure: [['Pronoun', 'Verb', 'Article', 'Noun', 'Preposition', 'Article', 'Noun', 'Conjunction', 'Verb', 'Adverb']]}, // She took the book from the shelf and read more. (more is Adverb here)
 
-  // Patterns with 'Unknown' as a wildcard (use sparingly if needed for flexibility, but generally avoid)
+  // User requested pattern
+  { name: "Adverb-Verb-Article-Adjective-Noun", structure: [['Adverb', 'Verb', 'Article', 'Adjective', 'Noun']]}, // Always judge a good party.
+
+  // Additional complex patterns
+  { name: "Article-Noun-Verb-Noun-Preposition-Adjective-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun', 'Preposition', 'Adjective', 'Noun']]}, // The boy gave candy to happy children.
+  { name: "Pronoun-Verb-Adjective-Noun-Conjunction-Pronoun-Verb-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Adjective', 'Noun', 'Conjunction', 'Pronoun', 'Verb', 'Adjective', 'Noun']]}, // I like red cars and she likes blue bikes.
+  { name: "Noun-Verb-Preposition-Article-Noun-Adverb", structure: [['Noun', 'Verb', 'Preposition', 'Article', 'Noun', 'Adverb']]}, // People talk in the room loudly.
+  { name: "Pronoun-Verb-Noun-Preposition-Pronoun-Adverb", structure: [['Pronoun', 'Verb', 'Noun', 'Preposition', 'Pronoun', 'Adverb']]}, // She sent letters to them quickly.
+  { name: "Article-Adjective-Noun-Verb-Pronoun-Adverb", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Pronoun', 'Adverb']]}, // The fast car passed us suddenly.
+  { name: "Noun-Verb-Article-Adjective-Noun-Preposition-Noun", structure: [['Noun', 'Verb', 'Article', 'Adjective', 'Noun', 'Preposition', 'Noun']]}, // Artists paint a beautiful picture on canvas.
+  { name: "Adverb-Pronoun-Verb-Article-Noun-Conjunction-Verb-Adverb", structure: [['Adverb', 'Pronoun', 'Verb', 'Article', 'Noun', 'Conjunction', 'Verb', 'Adverb']]}, // Often I see a bird and sing happily.
+  { name: "Verb-Article-Noun-Preposition-Article-Adjective-Noun", structure: [['Verb', 'Article', 'Noun', 'Preposition', 'Article', 'Adjective', 'Noun']]}, // Take the key from the small box. (Imperative)
+  { name: "Pronoun-AuxVerb-Adverb-Verb-Noun", structure: [['Pronoun', 'Verb', 'Adverb', 'Verb', 'Noun']]}, // I will always remember you. (e.g. will is 'Verb', always 'Adverb', remember 'Verb', you 'Noun' or 'Pronoun' depending on 'You' card type)
+                                                                                                        // Simplified this to Pronoun-Verb(aux)-Adverb-Verb-Noun.
+                                                                                                        // Game uses 'Verb' for aux verbs like 'will', 'can', 'is'.
+  { name: "Article-Noun-Preposition-Article-Noun-Verb-Adverb", structure: [['Article', 'Noun', 'Preposition', 'Article', 'Noun', 'Verb', 'Adverb']]}, // The cat on the roof jumps silently.
+  { name: "Conjunction-Pronoun-Verb-Noun-Pronoun-Verb-Adjective", structure: [['Conjunction', 'Pronoun', 'Verb', 'Noun', 'Pronoun', 'Verb', 'Adjective']]}, // If you want food, I am ready.
+  { name: "Noun-Verb-Adjective-Preposition-Article-Noun-Adverb", structure: [['Noun', 'Verb', 'Adjective', 'Preposition', 'Article', 'Noun', 'Adverb']]}, // Stars shine bright in the sky always.
+
+  // Question Form (Simple examples - "Is" and "Do" are categorized as 'Verb')
+  { name: "Verb-Pronoun-Verb-Noun", structure: [['Verb', 'Pronoun', 'Verb', 'Noun']]}, // Do you like games? Is she a doctor?
+  { name: "Verb-Article-Noun-Verb-Adjective", structure: [['Verb', 'Article', 'Noun', 'Verb', 'Adjective']]}, // Is the food really good?
+  { name: "Verb-Noun-Verb-Preposition-Noun", structure: [['Verb', 'Noun', 'Verb', 'Preposition', 'Noun']]}, // Do cats play with yarn?
+  { name: "Pronoun(Wh)-Verb-Pronoun-Verb", structure: [['Pronoun', 'Verb', 'Pronoun', 'Verb']]}, // Who are you playing? (Who is Pronoun)
+
+  // More Fragments
+  { name: "Adverb-Adjective", structure: [['Adverb', 'Adjective']]}, // Very good. Really fast.
+  { name: "Preposition-Article-Noun", structure: [['Preposition', 'Article', 'Noun']]}, // In the house. On a table.
+  { name: "Preposition-Noun", structure: [['Preposition', 'Noun']]}, // With friends. By car.
+  { name: "Adjective-Noun-Preposition-Noun", structure: [['Adjective', 'Noun', 'Preposition', 'Noun']]}, // Big dog in yard.
+  { name: "Article-Adjective-Noun-Preposition-Article-Noun", structure: [['Article', 'Adjective', 'Noun', 'Preposition', 'Article', 'Noun']]}, // The red book on the desk.
+
+  // Patterns with multiple adjectives or adverbs
+  { name: "Article-Adjective-Adjective-Noun", structure: [['Article', 'Adjective', 'Adjective', 'Noun']]}, // The big red car.
+  { name: "Noun-Verb-Adverb-Adverb", structure: [['Noun', 'Verb', 'Adverb', 'Adverb']]}, // Dog runs very quickly.
+  { name: "Pronoun-Verb-Adjective-Adjective", structure: [['Pronoun', 'Verb', 'Adjective', 'Adjective']]}, // She is smart and kind. (if 'and' is missing, implies serial adjectives)
+  { name: "Adverb-Adverb-Verb", structure: [['Adverb', 'Adverb', 'Verb']]}, // Very quickly run.
+
+  // Patterns emphasizing specific conjunction uses
+  { name: "Pronoun-Verb-Noun-Conjunction-Pronoun-Verb-Noun-Adverb", structure: [['Pronoun', 'Verb', 'Noun', 'Conjunction', 'Pronoun', 'Verb', 'Noun', 'Adverb']]}, // I like tea but he likes coffee more.
+  { name: "If-Pronoun-Verb-Then-Pronoun-Verb", structure: [['Conjunction', 'Pronoun', 'Verb', 'Conjunction', 'Pronoun', 'Verb']]}, // If you go, then I go. (Then is also a Conjunction or Adverb depending on context, using 'Conjunction' here for pattern)
+  { name: "Noun-Verb-Adjective-Because-Noun-Verb-Adjective", structure: [['Noun', 'Verb', 'Adjective', 'Conjunction', 'Noun', 'Verb', 'Adjective']]}, // Sky is blue because air is clean.
+
+  { name: "Article-Noun-Verb-Adverb-Preposition-Article-Adjective-Noun-Conjunction-Verb-Adverb", structure: [['Article', 'Noun', 'Verb', 'Adverb', 'Preposition', 'Article', 'Adjective', 'Noun', 'Conjunction', 'Verb', 'Adverb']]}, // The bird flew quickly over the green field and sang sweetly.
+  { name: "Pronoun-Verb-Article-Noun-While-Pronoun-Verb-Article-Noun", structure: [['Pronoun', 'Verb', 'Article', 'Noun', 'Conjunction', 'Pronoun', 'Verb', 'Article', 'Noun']]}, // I read a book while she watched a movie. (While is Conjunction)
+  { name: "Although-Noun-Verb-Adjective-Pronoun-Still-Verb-Noun", structure: [['Conjunction', 'Noun', 'Verb', 'Adjective', 'Pronoun', 'Adverb', 'Verb', 'Noun']]}, // Although food was cold, she still ate it. (Still is Adverb)
+
+  // Patterns involving "Unknown" should be avoided if possible, but as placeholders if truly needed:
   // { name: "Noun-Verb-Unknown", structure: [['Noun', 'Verb', 'Unknown']] }, 
 ];
 
