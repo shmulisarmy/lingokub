@@ -20,11 +20,27 @@ export function DevPanel({ onClose }: DevPanelProps) {
     Array(MAX_SEARCH_TERMS).fill('')
   );
   const [filteredPatterns, setFilteredPatterns] = useState<SentencePattern[]>([]);
+  const [selectOpenStates, setSelectOpenStates] = useState<boolean[]>(
+    Array(MAX_SEARCH_TERMS).fill(false)
+  );
 
   const handleCategoryChange = (index: number, value: CardCategory | '') => {
     const newSequence = [...searchSequence];
     newSequence[index] = value;
     setSearchSequence(newSequence);
+  };
+
+  const handleSelectOpenChange = (index: number, isOpen: boolean) => {
+    const newOpenStates = [...selectOpenStates];
+    // Close all other selects when one is opened
+    if (isOpen) {
+      for (let i = 0; i < newOpenStates.length; i++) {
+        newOpenStates[i] = i === index;
+      }
+    } else {
+      newOpenStates[index] = false;
+    }
+    setSelectOpenStates(newOpenStates);
   };
 
   const handleSearch = useCallback(() => {
@@ -47,17 +63,19 @@ export function DevPanel({ onClose }: DevPanelProps) {
           }
           if (isMatch) {
             matched.push(pattern);
-            return; // Add pattern once if any of its structures match
+            return; 
           }
         }
       }
     });
     setFilteredPatterns(matched);
+    setSelectOpenStates(Array(MAX_SEARCH_TERMS).fill(false)); // Close all selects after search
   }, [searchSequence]);
 
   const handleReset = () => {
     setSearchSequence(Array(MAX_SEARCH_TERMS).fill(''));
     setFilteredPatterns([]);
+    setSelectOpenStates(Array(MAX_SEARCH_TERMS).fill(false)); // Close all selects on reset
   };
 
   return (
@@ -81,12 +99,13 @@ export function DevPanel({ onClose }: DevPanelProps) {
               <Select
                 value={selectedCategory}
                 onValueChange={(value) => handleCategoryChange(index, value as CardCategory | '')}
+                open={selectOpenStates[index]}
+                onOpenChange={(isOpen) => handleSelectOpenChange(index, isOpen)}
               >
                 <SelectTrigger id={`category-select-${index}`}>
                   <SelectValue placeholder="Any Category" />
                 </SelectTrigger>
                 <SelectContent>
-                  {/* <SelectItem value="">Any Category</SelectItem> Removed this line */}
                   {CATEGORIES.map(category => (
                     <SelectItem key={category} value={category}>
                       {category}
