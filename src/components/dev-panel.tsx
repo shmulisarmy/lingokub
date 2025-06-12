@@ -105,7 +105,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
                 <SelectTrigger id={`category-select-${index}`}>
                   <SelectValue placeholder="Any Category" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="z-[110]">
                   {CATEGORIES.map(category => (
                     <SelectItem key={category} value={category}>
                       {category}
