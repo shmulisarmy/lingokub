@@ -324,6 +324,7 @@ export const SENTENCE_PATTERNS: SentencePattern[] = [
   
   // Patterns with Noun Objects
   { name: "Pronoun-Verb-Noun", structure: [['Pronoun', 'Verb', 'Noun']] },
+  { name: "Pronoun-Verb-Pronoun", structure: [['Pronoun', 'Verb', 'Pronoun']] }, // e.g., You understand me
   { name: "Article-Noun-Verb-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun']] }, // The cat chased mice
   { name: "Noun-Verb-Noun", structure: [['Noun', 'Verb', 'Noun']] }, // Dogs chase cats
   { name: "Pronoun-Verb-Article-Noun", structure: [['Pronoun', 'Verb', 'Article', 'Noun']] }, // She has a car
