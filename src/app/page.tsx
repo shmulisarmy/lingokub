@@ -8,9 +8,10 @@ import { GameControls } from '@/components/game-controls';
 import { StatusDisplay } from '@/components/status-display';
 import { AIPanel } from '@/components/ai-panel';
 import type { WordCard as WordCardType, GridCell, SelectedCardInfo } from '@/types';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
+import { DevPanel } from '@/components/dev-panel';
 
 
 export default function LexicaLabyrinthPage() {
@@ -28,11 +29,26 @@ export default function LexicaLabyrinthPage() {
     setDraggedItem,
   } = useGameLogic();
 
+  const [showDevPanel, setShowDevPanel] = useState(false);
+
   useEffect(() => {
     const dragEndHandler = () => setDraggedItem(null);
     document.addEventListener('dragend', dragEndHandler);
     return () => document.removeEventListener('dragend', dragEndHandler);
   }, [setDraggedItem]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === 'b') {
+        event.preventDefault();
+        setShowDevPanel(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   const hasPlacedCardsThisTurn = useMemo(() => {
     if (!gameState) return false;
@@ -83,7 +99,6 @@ export default function LexicaLabyrinthPage() {
   const onCellClick = (rowIndex: number, colIndex: number) => {
     const cell = gameBoard[rowIndex][colIndex];
     if (cell) {
-      // If card is already selected and it's the same card, deselect it (optional)
       if (selectedCardInfo?.source === 'board' && 
           selectedCardInfo.boardCoordinates?.row === rowIndex && 
           selectedCardInfo.boardCoordinates?.col === colIndex) {
@@ -100,7 +115,7 @@ export default function LexicaLabyrinthPage() {
 
   const onHandCardSelect = (card: WordCardType, handIndex: number) => {
      if (selectedCardInfo?.source === 'hand' && selectedCardInfo.handIndex === handIndex) {
-      selectCard(null); // Deselect if same hand card is clicked again
+      selectCard(null); 
     } else {
       selectCard({ card, source: 'hand', handIndex });
     }
@@ -176,8 +191,7 @@ export default function LexicaLabyrinthPage() {
         <p>LexicaLabyrinth - A word placement game.</p>
         <p>Tip: Form grammatical sentences or groups of 3+ words starting with the same letter horizontally.</p>
       </footer>
+      {showDevPanel && <DevPanel onClose={() => setShowDevPanel(false)} />}
     </div>
   );
 }
-
-    
