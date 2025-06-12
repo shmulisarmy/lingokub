@@ -1,3 +1,4 @@
+
 'use client';
 
 import type { WordCard as WordCardType, GridCell, CardCategory } from '@/types';
@@ -26,8 +27,9 @@ export function WordCard({
   onDragStart,
   className,
 }: WordCardProps) {
-  const primaryCategory = getPrimaryCategory(card.categories);
+  const primaryCategory = getPrimaryCategory(card.categories); // Still used for color
   const colorClass = getCardCategoryColor(primaryCategory);
+  const displayCategories = card.categories.join(', ');
 
   const validationState = (card as GridCell).validationState;
   let borderClass = 'border-transparent';
@@ -53,14 +55,14 @@ export function WordCard({
       onClick={onClick}
       draggable={draggable}
       onDragStart={onDragStart}
-      aria-label={`Word card: ${card.text}, Category: ${primaryCategory}`}
+      aria-label={`Word card: ${card.text}, Categories: ${displayCategories}`}
       tabIndex={onClick ? 0 : -1}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') onClick?.();
       }}
     >
       <span className="font-bold text-lg">{card.text}</span>
-      <span className="text-xs opacity-80">{primaryCategory}</span>
+      <span className="text-xs opacity-80">{displayCategories}</span>
       {isRemovable && onRemove && (
         <Button
           variant="ghost"
@@ -78,3 +80,4 @@ export function WordCard({
     </div>
   );
 }
+
