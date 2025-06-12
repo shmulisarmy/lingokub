@@ -12,7 +12,7 @@ export default {
       fontFamily: {
         body: ['Inter', 'sans-serif'],
         headline: ['Inter', 'sans-serif'],
-        code: ['monospace'],
+        code: ['"Source Code Pro"', 'monospace'],
       },
       colors: {
         background: 'hsl(var(--background))',
@@ -93,6 +93,12 @@ export default {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      gridTemplateColumns: {
+        '8': 'repeat(8, minmax(0, 1fr))',
+      },
+      gridTemplateRows: {
+        '5': 'repeat(5, minmax(0, 1fr))',
+      }
     },
   },
   plugins: [require('tailwindcss-animate')],

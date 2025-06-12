@@ -2,37 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --background: 0 0% 83%; /* Light Gray #D3D3D3 */
+    --foreground: 222 47% 11%; /* Dark text for contrast */
+
+    --muted: 0 0% 90%; /* Lighter gray for muted elements */
+    --muted-foreground: 0 0% 45.1%; /* Darker muted text */
+
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
+    --popover-foreground: 222 47% 11%;
+
+    --card: 0 0% 97%; /* Slightly off-white for cards */
+    --card-foreground: 222 47% 11%;
+
+    --border: 0 0% 80%; /* Slightly darker border */
+    --input: 0 0% 80%;
+
+    --primary: 206 25% 56%; /* Slate Blue #7395AE */
+    --primary-foreground: 0 0% 100%; /* White text on primary */
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222 47% 11%;
+    
+    --accent: 16 65% 70%; /* Coral #E39577 */
+    --accent-foreground: 0 0% 10%; /* Dark text on accent */
+
+    --destructive: 0 72% 51%; /* Adjusted destructive red */
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+
+    --ring: 206 25% 56%; /* Slate Blue for rings */
+
+    --radius: 0.5rem;
+
+    /* Chart colors (can be kept or adjusted if charts are used) */
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+
+    /* Sidebar specific colors (may not be used directly if no sidebar component) */
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -42,31 +52,45 @@ body {
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --border: 217 33% 27%;
+    --input: 217 33% 27%;
+
+    --primary: 206 25% 56%; /* Slate Blue #7395AE */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --accent: 16 65% 70%; /* Coral #E39577 */
+    --accent-foreground: 0 0% 10%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --ring: 206 25% 56%;
+    
+    /* Chart colors for dark theme */
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+
+    /* Sidebar specific colors for dark theme */
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -83,6 +107,19 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+    min-height: 100vh;
   }
 }
+
+/* Custom gradient classes for word cards */
+.noun-gradient { @apply bg-gradient-to-br from-purple-400 to-purple-600 text-white; }
+.verb-gradient { @apply bg-gradient-to-br from-red-400 to-red-600 text-white; }
+.adjective-gradient { @apply bg-gradient-to-br from-blue-400 to-blue-600 text-white; }
+.adverb-gradient { @apply bg-gradient-to-br from-green-400 to-green-600 text-white; }
+.pronoun-gradient { @apply bg-gradient-to-br from-pink-400 to-pink-600 text-white; }
+.article-gradient { @apply bg-gradient-to-br from-gray-400 to-gray-600 text-white; }
+.preposition-gradient { @apply bg-gradient-to-br from-yellow-400 to-orange-500 text-black; } /* Ensure text contrast */
+.conjunction-gradient { @apply bg-gradient-to-br from-cyan-400 to-cyan-600 text-black; } /* Ensure text contrast */
+.default-gradient { @apply bg-gradient-to-br from-slate-400 to-slate-600 text-white; }
+
