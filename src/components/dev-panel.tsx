@@ -5,9 +5,9 @@ import { useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { CATEGORIES, SENTENCE_PATTERNS } from '@/lib/constants';
-import type { CardCategory, SentencePattern } from '@/types';
-import { XIcon } from 'lucide-react';
+import { CATEGORIES, SENTENCE_PATTERNS, INITIAL_DECK } from '@/lib/constants';
+import type { CardCategory, SentencePattern, WordCard } from '@/types';
+import { XIcon, SparklesIcon } from 'lucide-react';
 
 interface DevPanelProps {
   onClose: () => void;
@@ -23,6 +23,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
   const [selectOpenStates, setSelectOpenStates] = useState<boolean[]>(
     Array(MAX_SEARCH_TERMS).fill(false)
   );
+  const [exampleSentences, setExampleSentences] = useState<Record<string, string>>({});
 
   const handleCategoryChange = (index: number, value: CardCategory | '') => {
     const newSequence = [...searchSequence];
@@ -32,7 +33,6 @@ export function DevPanel({ onClose }: DevPanelProps) {
 
   const handleSelectOpenChange = (index: number, isOpen: boolean) => {
     const newOpenStates = [...selectOpenStates];
-    // Close all other selects when one is opened
     if (isOpen) {
       for (let i = 0; i < newOpenStates.length; i++) {
         newOpenStates[i] = i === index;
@@ -46,7 +46,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
   const handleSearch = useCallback(() => {
     const activeSearchPrefix = searchSequence.filter(term => term !== '');
     if (activeSearchPrefix.length === 0) {
-      setFilteredPatterns(SENTENCE_PATTERNS); // Show all if search is empty
+      setFilteredPatterns(SENTENCE_PATTERNS);
       return;
     }
 
@@ -69,13 +69,38 @@ export function DevPanel({ onClose }: DevPanelProps) {
       }
     });
     setFilteredPatterns(matched);
-    setSelectOpenStates(Array(MAX_SEARCH_TERMS).fill(false)); // Close all selects after search
+    setExampleSentences({}); // Clear examples on new search
+    setSelectOpenStates(Array(MAX_SEARCH_TERMS).fill(false)); 
   }, [searchSequence]);
 
   const handleReset = () => {
     setSearchSequence(Array(MAX_SEARCH_TERMS).fill(''));
     setFilteredPatterns([]);
-    setSelectOpenStates(Array(MAX_SEARCH_TERMS).fill(false)); // Close all selects on reset
+    setExampleSentences({});
+    setSelectOpenStates(Array(MAX_SEARCH_TERMS).fill(false));
+  };
+
+  const generateExample = (patternIndex: number, structureRuleIndex: number) => {
+    const pattern = filteredPatterns[patternIndex];
+    if (!pattern) return;
+    const structureRule = pattern.structure[structureRuleIndex];
+    if (!structureRule) return;
+
+    const exampleWords: string[] = [];
+    for (const category of structureRule) {
+      const wordsInCategory = INITIAL_DECK.filter(card => card.categories.includes(category));
+      if (wordsInCategory.length > 0) {
+        const randomWord = wordsInCategory[Math.floor(Math.random() * wordsInCategory.length)];
+        exampleWords.push(randomWord.text);
+      } else {
+        exampleWords.push(`[${category}?]`);
+      }
+    }
+    
+    setExampleSentences(prev => ({
+      ...prev,
+      [`${patternIndex}-${structureRuleIndex}`]: exampleWords.join(' ')
+    }));
   };
 
   return (
@@ -124,14 +149,35 @@ export function DevPanel({ onClose }: DevPanelProps) {
         {filteredPatterns.length > 0 && (
           <div className="mt-4 space-y-2">
             <h4 className="font-semibold text-foreground">Matching Patterns ({filteredPatterns.length}):</h4>
-            <div className="max-h-[40vh] overflow-y-auto p-2 border rounded-md bg-muted/50 space-y-1">
+            <div className="max-h-[35vh] overflow-y-auto p-2 border rounded-md bg-muted/50 space-y-1">
               {filteredPatterns.map((pattern, pIndex) => (
-                <div key={pIndex} className="text-xs p-1 rounded bg-card">
-                  <strong className="text-primary">{pattern.name}:</strong>
-                  <ul className="list-disc list-inside ml-2">
-                  {pattern.structure.map((struct, sIndex) => (
-                    <li key={sIndex}>{struct.join(' - ')}</li>
-                  ))}
+                <div key={pIndex} className="text-xs p-2 rounded bg-card mb-2 shadow">
+                  <strong className="text-primary block mb-1">{pattern.name}:</strong>
+                  <ul className="list-none ml-0 space-y-1">
+                  {pattern.structure.map((struct, sIndex) => {
+                    const exampleKey = `${pIndex}-${sIndex}`;
+                    return (
+                      <li key={sIndex} className="p-1 border-b border-border/50 last:border-b-0">
+                        <div className="flex justify-between items-center">
+                          <span>{struct.join(' - ')}</span>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="h-6 px-2 py-1 text-xs"
+                            onClick={() => generateExample(pIndex, sIndex)}
+                          >
+                            <SparklesIcon className="mr-1 h-3 w-3" />
+                            Example
+                          </Button>
+                        </div>
+                        {exampleSentences[exampleKey] && (
+                          <p className="mt-1 text-xs text-accent-foreground italic bg-accent/10 p-1 rounded">
+                            Ex: {exampleSentences[exampleKey]}
+                          </p>
+                        )}
+                      </li>
+                    );
+                  })}
                   </ul>
                 </div>
               ))}
