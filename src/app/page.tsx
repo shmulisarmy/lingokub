@@ -8,10 +8,9 @@ import { GameControls } from '@/components/game-controls';
 import { StatusDisplay } from '@/components/status-display';
 import { AIPanel } from '@/components/ai-panel';
 import type { WordCard as WordCardType, GridCell, SelectedCardInfo } from '@/types';
-// import { DndProvider } from 'react-dnd'; // If using react-dnd
-// import { HTML5Backend } from 'react-dnd-html5-backend'; // If using react-dnd
 import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import { Loader2 } from 'lucide-react';
 
 
 export default function LexicaLabyrinthPage() {
@@ -27,6 +26,21 @@ export default function LexicaLabyrinthPage() {
     handleDrop,
     setDraggedItem,
   } = useGameLogic();
+
+  useEffect(() => {
+    const dragEndHandler = () => setDraggedItem(null);
+    document.addEventListener('dragend', dragEndHandler);
+    return () => document.removeEventListener('dragend', dragEndHandler);
+  }, [setDraggedItem]);
+
+  if (!gameState) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-background">
+        <Loader2 className="h-16 w-16 animate-spin text-primary" />
+        <p className="mt-4 text-lg text-foreground">Loading LexicaLabyrinth...</p>
+      </div>
+    );
+  }
 
   const {
     players,
@@ -72,14 +86,8 @@ export default function LexicaLabyrinthPage() {
     selectCard({ card, source: 'hand', handIndex });
   };
   
-  useEffect(() => {
-    const dragEndHandler = () => setDraggedItem(null);
-    document.addEventListener('dragend', dragEndHandler);
-    return () => document.removeEventListener('dragend', dragEndHandler);
-  }, [setDraggedItem]);
 
   return (
-    // If using react-dnd, wrap with DndProvider: <DndProvider backend={HTML5Backend}>
     <div className="flex flex-col items-center min-h-screen p-2 md:p-6 bg-background">
       <header className="w-full max-w-5xl mb-6">
         <h1 className="text-3xl md:text-4xl font-bold text-center text-primary font-headline mb-2">
@@ -147,8 +155,5 @@ export default function LexicaLabyrinthPage() {
         <p>Tip: Form grammatical sentences or groups of 3+ words starting with the same letter horizontally.</p>
       </footer>
     </div>
-    // </DndProvider>
   );
 }
-
-    

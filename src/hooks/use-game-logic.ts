@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
@@ -17,35 +18,40 @@ const initialPlayer = (id: string, name: string): Player => ({
   hand: [],
 });
 
+function initializeGame(): GameState {
+  const shuffledDeck = shuffleArray(INITIAL_DECK);
+  const players: [Player, Player] = [
+    initialPlayer('player1', 'Player 1'),
+    initialPlayer('player2', 'Player 2'),
+  ];
+
+  // Deal cards
+  for (let i = 0; i < PLAYER_COUNT; i++) {
+    players[i].hand = shuffledDeck.splice(0, INITIAL_HAND_SIZE);
+  }
+  
+  return {
+    players,
+    currentPlayerIndex: 0,
+    gameBoard: createEmptyBoard(),
+    isGameWon: false,
+    selectedCardInfo: null,
+    actionsThisTurn: 0,
+    winner: null,
+    deck: shuffledDeck,
+    turnMessages: [],
+    highlightedIssues: [],
+  };
+}
+
 export function useGameLogic() {
-  const [gameState, setGameState] = useState<GameState>(() => initializeGame());
+  const [gameState, setGameState] = useState<GameState | null>(null); // Initialize with null
   const { toast } = useToast();
 
-  function initializeGame(): GameState {
-    const shuffledDeck = shuffleArray(INITIAL_DECK);
-    const players: [Player, Player] = [
-      initialPlayer('player1', 'Player 1'),
-      initialPlayer('player2', 'Player 2'),
-    ];
-
-    // Deal cards
-    for (let i = 0; i < PLAYER_COUNT; i++) {
-      players[i].hand = shuffledDeck.splice(0, INITIAL_HAND_SIZE);
-    }
-    
-    return {
-      players,
-      currentPlayerIndex: 0,
-      gameBoard: createEmptyBoard(),
-      isGameWon: false,
-      selectedCardInfo: null,
-      actionsThisTurn: 0,
-      winner: null,
-      deck: shuffledDeck,
-      turnMessages: [],
-      highlightedIssues: [],
-    };
-  }
+  useEffect(() => {
+    // Initialize game on client-side after mount
+    setGameState(initializeGame());
+  }, []); // Empty dependency array ensures this runs once on mount
 
   const newGame = useCallback(() => {
     setGameState(initializeGame());
@@ -53,12 +59,12 @@ export function useGameLogic() {
   }, [toast]);
 
   const selectCard = useCallback((cardInfo: SelectedCardInfo | null) => {
-    setGameState(prev => ({ ...prev, selectedCardInfo: cardInfo }));
+    setGameState(prev => prev ? ({ ...prev, selectedCardInfo: cardInfo }) : null);
   }, []);
 
   const placeCardOnBoard = useCallback((rowIndex: number, colIndex: number) => {
     setGameState(prev => {
-      if (!prev.selectedCardInfo) return prev;
+      if (!prev || !prev.selectedCardInfo) return prev;
 
       const { card, source, handIndex, boardCoordinates } = prev.selectedCardInfo;
       const newBoard = prev.gameBoard.map(row => [...row]);
@@ -122,6 +128,7 @@ export function useGameLogic() {
 
   const removeCardFromBoard = useCallback((rowIndex: number, colIndex: number) => {
     setGameState(prev => {
+      if (!prev) return prev;
       const cardToRemove = prev.gameBoard[rowIndex][colIndex];
       if (!cardToRemove || !cardToRemove.isNewThisTurn || cardToRemove.placedByPlayerId !== prev.players[prev.currentPlayerIndex].id) {
         toast({ title: "Invalid Action", description: "Cannot remove this card.", variant: "destructive"});
@@ -133,7 +140,6 @@ export function useGameLogic() {
 
       const newPlayers = prev.players.map(p => ({...p, hand: [...p.hand]})) as [Player, Player];
       const player = newPlayers[prev.currentPlayerIndex];
-      // Return card to hand. For simplicity, add to end. Original index might be complex to track precisely.
       player.hand.push({ id: cardToRemove.id, text: cardToRemove.text, categories: cardToRemove.categories });
       
       const { issues } = validateBoard(newBoard);
@@ -142,7 +148,7 @@ export function useGameLogic() {
         ...prev,
         gameBoard: newBoard,
         players: newPlayers,
-        actionsThisTurn: prev.actionsThisTurn > 0 ? prev.actionsThisTurn -1 : 0, // Decrement action, ensure not negative
+        actionsThisTurn: prev.actionsThisTurn > 0 ? prev.actionsThisTurn -1 : 0, 
         highlightedIssues: issues,
       };
     });
@@ -150,19 +156,19 @@ export function useGameLogic() {
 
   const drawCard = useCallback(() => {
     setGameState(prev => {
+      if (!prev) return prev;
       if (prev.deck.length === 0) {
         toast({ title: "Deck Empty", description: "No more cards to draw.", variant: "destructive"});
         return prev;
       }
 
       const newDeck = [...prev.deck];
-      const drawnCard = newDeck.pop()!; // Assert pop since we checked length
+      const drawnCard = newDeck.pop()!;
 
       const newPlayers = prev.players.map(p => ({...p, hand: [...p.hand]})) as [Player, Player];
       const player = newPlayers[prev.currentPlayerIndex];
       player.hand.push(drawnCard);
 
-      // Drawing a card counts as an action for turn completion
       return {
         ...prev,
         players: newPlayers,
@@ -174,6 +180,7 @@ export function useGameLogic() {
 
   const endTurn = useCallback(() => {
     setGameState(prev => {
+      if (!prev) return prev;
       if (prev.actionsThisTurn === 0) {
         toast({ title: "No Action Taken", description: "You must place, move, or draw a card.", variant: "destructive"});
         return prev;
@@ -185,14 +192,12 @@ export function useGameLogic() {
         return { ...prev, highlightedIssues: issues };
       }
 
-      // Check for win condition
       const currentPlayer = prev.players[prev.currentPlayerIndex];
       if (currentPlayer.hand.length === 0) {
         toast({ title: "Congratulations!", description: `${currentPlayer.name} wins!` });
         return { ...prev, isGameWon: true, winner: currentPlayer, highlightedIssues: [] };
       }
       
-      // Reset isNewThisTurn flags on board
       const newBoard = prev.gameBoard.map(row => 
         row.map(cell => cell ? { ...cell, isNewThisTurn: false, validationState: 'neutral' } : null)
       );
@@ -210,28 +215,19 @@ export function useGameLogic() {
     });
   }, [toast]);
 
-  // Handle drag state
   const [draggedItem, setDraggedItem] = useState<SelectedCardInfo | null>(null);
 
   const handleDragStart = useCallback((itemInfo: SelectedCardInfo) => {
     setDraggedItem(itemInfo);
-    // For browser's DND API, you might need to use event.dataTransfer
   }, []);
 
   const handleDrop = useCallback((rowIndex: number, colIndex: number) => {
     if (draggedItem) {
-      // Logic to place card from hand or move card on board
-      // This combines selectCard and placeCardOnBoard logic for DND
-      const originalSelectedCardInfo = gameState.selectedCardInfo;
+      const originalSelectedCardInfo = gameState?.selectedCardInfo;
 
-      setGameState(prev => ({ ...prev, selectedCardInfo: draggedItem }));
-      // Place card will use the new selectedCardInfo set just above
-      // It's a bit of a sequence, might need refinement for direct DND update
-      // For now, it simulates: select(draggedItem) then placeCardOnBoard(target)
-      
-      // Directly call a modified placeCardOnBoard or a new DND handler
       setGameState(prev => {
-        if (!draggedItem) return prev; // Should not happen if handleDrop is called after dragStart
+         if (!prev || !draggedItem) return prev;
+        
         const { card, source, handIndex, boardCoordinates } = draggedItem;
         
         const newBoard = prev.gameBoard.map(r => [...r]);
@@ -241,7 +237,6 @@ export function useGameLogic() {
 
         const targetCellCurrentContent = newBoard[rowIndex][colIndex];
 
-        // Prepare the new cell content
         const newGridCellData: GridCell = {
           ...card,
           isNewThisTurn: true,
@@ -249,7 +244,6 @@ export function useGameLogic() {
           validationState: 'neutral',
         };
 
-        // Case 1: Dragging from hand OR dragging from board to an EMPTY cell
         if (source === 'hand' || (source === 'board' && !targetCellCurrentContent)) {
           newBoard[rowIndex][colIndex] = newGridCellData;
           if (source === 'hand' && handIndex !== undefined) {
@@ -259,20 +253,16 @@ export function useGameLogic() {
           }
           newActionsThisTurn++;
         }
-        // Case 2: Dragging from board to an OCCUPIED cell (SWAP)
         else if (source === 'board' && boardCoordinates && targetCellCurrentContent) {
-           // Only allow swap if target card is not fixed or belongs to current player (simplified: allow any swap for now)
-          newBoard[rowIndex][colIndex] = newGridCellData; // Place dragged card
-          newBoard[boardCoordinates.row][boardCoordinates.col] = { // Place target card in origin
+          newBoard[rowIndex][colIndex] = newGridCellData; 
+          newBoard[boardCoordinates.row][boardCoordinates.col] = { 
             ...targetCellCurrentContent,
-             isNewThisTurn: true, // The swapped card is also 'new'
-             // placedByPlayerId: targetCellCurrentContent.placedByPlayerId, // Keep original ownership
+             isNewThisTurn: true, 
           };
           newActionsThisTurn++;
         } else {
-          // Drag from hand to occupied cell not allowed by this logic (must be empty)
            toast({ title: "Invalid Move", description: "Cannot place card from hand onto an occupied cell.", variant: "destructive"});
-           return { ...prev, selectedCardInfo: originalSelectedCardInfo }; // Restore original selection if DND failed
+           return { ...prev, selectedCardInfo: originalSelectedCardInfo || null };
         }
         
         const { issues } = validateBoard(newBoard);
@@ -281,7 +271,7 @@ export function useGameLogic() {
           ...prev,
           gameBoard: newBoard,
           players: newPlayers,
-          selectedCardInfo: null, // Clear selection after DND
+          selectedCardInfo: null, 
           actionsThisTurn: newActionsThisTurn,
           turnMessages: [],
           highlightedIssues: issues,
@@ -289,7 +279,7 @@ export function useGameLogic() {
       });
     }
     setDraggedItem(null);
-  }, [draggedItem, gameState.selectedCardInfo, toast]);
+  }, [draggedItem, gameState, toast]);
 
 
   return {
@@ -302,7 +292,7 @@ export function useGameLogic() {
     endTurn,
     handleDragStart,
     handleDrop,
-    draggedItem, // Expose for UI to clear if needed
-    setDraggedItem, // Expose for dragOver
+    draggedItem, 
+    setDraggedItem, 
   };
 }
