@@ -481,7 +481,6 @@ export const SENTENCE_PATTERNS: SentencePattern[] = [
   { name: "Pronoun-Adverb-Verb", structure: [['Pronoun', 'Adverb', 'Verb']] }, 
   { name: "Noun-Adverb-Verb", structure: [['Noun', 'Adverb', 'Verb']] }, 
   { name: "Adverb-Verb", structure: [['Adverb', 'Verb']] }, 
-  // { name: "Verb-Adverb", structure: [['Verb', 'Adverb']] }, // Removed as "Enjoy Heavy" (Verb-Adj) was too broad. This is similar.
   { name: "Article-Adjective-Noun-Verb-Adverb", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Adverb']] }, 
   { name: "Pronoun-Verb-Noun-Adverb", structure: [['Pronoun', 'Verb', 'Noun', 'Adverb']]}, 
   { name: "Article-Adverb-Adjective-Noun", structure: [['Article', 'Adverb', 'Adjective', 'Noun']] }, 
@@ -557,6 +556,7 @@ export const SENTENCE_PATTERNS: SentencePattern[] = [
 
   // User requested pattern
   { name: "Adverb-Verb-Article-Adjective-Noun", structure: [['Adverb', 'Verb', 'Article', 'Adjective', 'Noun']]}, 
+  { name: "Article-Adjective-Noun-Verb-Adjective-Noun", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Adjective', 'Noun']]},
 
   // Additional complex patterns
   { name: "Article-Noun-Verb-Noun-Preposition-Adjective-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun', 'Preposition', 'Adjective', 'Noun']]}, 
