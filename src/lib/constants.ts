@@ -418,81 +418,102 @@ export const INITIAL_DECK: WordCard[] = [
 ];
 
 export const SENTENCE_PATTERNS: SentencePattern[] = [
-  // Basic patterns
-  { name: "Pronoun-Verb", structure: [['Pronoun', 'Verb']] },
-  { name: "Article-Noun-Verb", structure: [['Article', 'Noun', 'Verb']] },
-  { name: "Noun-Verb", structure: [['Noun', 'Verb']] },
+  // Basic patterns (S-V, S-V-O)
+  { name: "Pronoun-Verb", structure: [['Pronoun', 'Verb']] }, // I run. She thinks.
+  { name: "Article-Noun-Verb", structure: [['Article', 'Noun', 'Verb']] }, // The cat sleeps. A dog barks.
+  { name: "Noun-Verb", structure: [['Noun', 'Verb']] }, // Cats sleep. Dogs bark.
+  { name: "Pronoun-Verb-Noun", structure: [['Pronoun', 'Verb', 'Noun']] }, // I like cats. She reads books.
+  { name: "Pronoun-Verb-Pronoun", structure: [['Pronoun', 'Verb', 'Pronoun']] }, // You understand me. He saw her.
+  { name: "Article-Noun-Verb-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun']] }, // The cat chased mice. A boy threw balls.
+  { name: "Noun-Verb-Noun", structure: [['Noun', 'Verb', 'Noun']] }, // Dogs chase cats. Birds eat worms.
+  { name: "Pronoun-Verb-Article-Noun", structure: [['Pronoun', 'Verb', 'Article', 'Noun']] }, // She has a car. We need a plan.
+  { name: "Noun-Verb-Article-Noun", structure: [['Noun', 'Verb', 'Article', 'Noun']] }, // Man bites a dog. Child wants a toy.
   
-  // Patterns with Adjectives
-  { name: "Pronoun-Verb-Adjective", structure: [['Pronoun', 'Verb', 'Adjective']] },
-  { name: "Article-Adjective-Noun", structure: [['Article', 'Adjective', 'Noun']] },
-  { name: "Noun-Verb-Adjective", structure: [['Noun', 'Verb', 'Adjective']] },
-  { name: "Article-Noun-Verb-Adjective", structure: [['Article', 'Noun', 'Verb', 'Adjective']] },
-  { name: "Adjective-Noun", structure: [['Adjective', 'Noun']] }, // e.g. Big dog. (Part of sentence)
+  // Patterns with Adjectives (S-V-Adj, Adj-N)
+  { name: "Pronoun-Verb-Adjective", structure: [['Pronoun', 'Verb', 'Adjective']] }, // It is good. She seems happy.
+  { name: "Article-Adjective-Noun", structure: [['Article', 'Adjective', 'Noun']] }, // The red car. A big dog. (Fragment, but common)
+  { name: "Noun-Verb-Adjective", structure: [['Noun', 'Verb', 'Adjective']] }, // Food is good. Sky is blue.
+  { name: "Article-Noun-Verb-Adjective", structure: [['Article', 'Noun', 'Verb', 'Adjective']] }, // The cat is black. A day was warm.
+  { name: "Adjective-Noun", structure: [['Adjective', 'Noun']] }, // Big dog. Red apple. (Fragment)
+  { name: "Adjective-Noun-Verb", structure: [['Adjective', 'Noun', 'Verb']] }, // Big dogs bark. Happy children play.
+  { name: "Article-Adjective-Noun-Verb", structure: [['Article', 'Adjective', 'Noun', 'Verb']] }, // The big dog barks. A happy child plays.
+  { name: "Pronoun-Verb-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Adjective', 'Noun']] }, // She likes red apples. He wants a new game.
+  { name: "Article-Noun-Verb-Adjective-Noun", structure: [['Article', 'Noun', 'Verb', 'Adjective', 'Noun']] }, // The boy found a small toy. A girl has pretty dolls.
 
-  // Patterns with Adverbs
-  { name: "Pronoun-Verb-Adverb", structure: [['Pronoun', 'Verb', 'Adverb']] },
-  { name: "Noun-Verb-Adverb", structure: [['Noun', 'Verb', 'Adverb']] },
-  { name: "Article-Noun-Verb-Adverb", structure: [['Article', 'Noun', 'Verb', 'Adverb']] },
-  { name: "Pronoun-Adverb-Verb", structure: [['Pronoun', 'Adverb', 'Verb']] }, // e.g. I often run
-  { name: "Noun-Adverb-Verb", structure: [['Noun', 'Adverb', 'Verb']] }, // e.g. Dogs often run
-  { name: "Verb-Adverb", structure: [['Verb', 'Adverb']] }, // e.g. Run quickly
+  // Patterns with Adverbs (S-V-Adv, S-Adv-V)
+  { name: "Pronoun-Verb-Adverb", structure: [['Pronoun', 'Verb', 'Adverb']] }, // She ran quickly. They spoke softly.
+  { name: "Noun-Verb-Adverb", structure: [['Noun', 'Verb', 'Adverb']] }, // Birds sing sweetly. Time flies fast.
+  { name: "Article-Noun-Verb-Adverb", structure: [['Article', 'Noun', 'Verb', 'Adverb']] }, // The dog runs quickly. A car moved slowly.
+  { name: "Pronoun-Adverb-Verb", structure: [['Pronoun', 'Adverb', 'Verb']] }, // I often run. She always smiles.
+  { name: "Noun-Adverb-Verb", structure: [['Noun', 'Adverb', 'Verb']] }, // Dogs often run. Stars brightly shine.
+  { name: "Verb-Adverb", structure: [['Verb', 'Adverb']] }, // Run quickly. Speak clearly. (Imperative fragment)
+  { name: "Article-Adjective-Noun-Verb-Adverb", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Adverb']] }, // The big dog runs quickly. A small bird sang beautifully.
+  { name: "Pronoun-Verb-Noun-Adverb", structure: [['Pronoun', 'Verb', 'Noun', 'Adverb']]}, // I eat food slowly. She did work carefully.
+  { name: "Article-Adverb-Adjective-Noun", structure: [['Article', 'Adverb', 'Adjective', 'Noun']] }, // The very big house. An extremely fast car. (Fragment)
+  { name: "Adverb-Adjective-Noun", structure: [['Adverb', 'Adjective', 'Noun']] }, // Very happy child. Really good food. (Fragment)
+
+  // Patterns with Prepositions (S-V-PrepP, N-PrepP)
+  { name: "Pronoun-Verb-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Preposition', 'Article', 'Noun']] }, // He ran to the park. She looked at the moon.
+  { name: "Noun-Verb-Preposition-Noun", structure: [['Noun', 'Verb', 'Preposition', 'Noun']] }, // Cat sleeps on bed. Dog walks in park.
+  { name: "Article-Noun-Verb-Preposition-Article-Noun", structure: [['Article', 'Noun', 'Verb', 'Preposition', 'Article', 'Noun']] }, // The dog ran under the table. A bird flew over the house.
+  { name: "Verb-Preposition-Noun", structure: [['Verb', 'Preposition', 'Noun']]}, // Go to school. Look for help. (Imperative)
+  { name: "Verb-Preposition-Article-Noun", structure: [['Verb', 'Preposition', 'Article', 'Noun']]}, // Look at the sky. Jump over the fence. (Imperative)
+  { name: "Noun-Preposition-Noun", structure: [['Noun', 'Preposition', 'Noun']]}, // Book on table. Cat in box. (Fragment)
+  { name: "Article-Noun-Preposition-Article-Noun", structure: [['Article', 'Noun', 'Preposition', 'Article', 'Noun']]}, // The cat in the hat. A fish in the bowl. (Fragment)
+  { name: "Pronoun-Verb-Adverb-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Adverb', 'Preposition', 'Article', 'Noun']]}, // She walked quickly to the store. He looked carefully under the bed.
+  { name: "Pronoun-Verb-Noun-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Noun', 'Preposition', 'Article', 'Noun']] }, // I put the book on the table.
+  { name: "Article-Noun-Verb-Noun-Preposition-Article-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun', 'Preposition', 'Article', 'Noun']] }, // The girl gave a gift to the boy.
   
-  // Patterns with Noun Objects
-  { name: "Pronoun-Verb-Noun", structure: [['Pronoun', 'Verb', 'Noun']] },
-  { name: "Pronoun-Verb-Pronoun", structure: [['Pronoun', 'Verb', 'Pronoun']] }, // e.g., You understand me
-  { name: "Article-Noun-Verb-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun']] }, // The cat chased mice
-  { name: "Noun-Verb-Noun", structure: [['Noun', 'Verb', 'Noun']] }, // Dogs chase cats
-  { name: "Pronoun-Verb-Article-Noun", structure: [['Pronoun', 'Verb', 'Article', 'Noun']] }, // She has a car
-  { name: "Noun-Verb-Article-Noun", structure: [['Noun', 'Verb', 'Article', 'Noun']] }, // Man bites a dog
+  // Patterns with Conjunctions (linking clauses or words)
+  { name: "Noun-Verb-Conjunction-Noun-Verb", structure: [['Noun', 'Verb', 'Conjunction', 'Noun', 'Verb']] }, // Dogs bark and cats meow. Sun shines or rain falls.
+  { name: "Pronoun-Verb-Conjunction-Pronoun-Verb", structure: [['Pronoun', 'Verb', 'Conjunction', 'Pronoun', 'Verb']] }, // I run and he walks. She reads but they play.
+  { name: "Noun-Conjunction-Noun-Verb", structure: [['Noun', 'Conjunction', 'Noun', 'Verb']]}, // Cat and dog play. Bread or cheese is good.
+  { name: "Verb-Conjunction-Verb", structure: [['Verb', 'Conjunction', 'Verb']]}, // Run and jump. Eat or drink. (Imperative)
+  { name: "Adjective-Conjunction-Adjective", structure: [['Adjective', 'Conjunction', 'Adjective']]}, // Big and tall. Red or blue. (Fragment)
+  { name: "Noun-Verb-Noun-Conjunction-Verb-Noun", structure: [['Noun', 'Verb', 'Noun', 'Conjunction', 'Verb', 'Noun']] }, // Birds eat worms and drink water.
+  { name: "Pronoun-Verb-Adjective-Conjunction-Verb-Adjective", structure: [['Pronoun', 'Verb', 'Adjective', 'Conjunction', 'Verb', 'Adjective']] }, // He is happy but she is sad.
+  { name: "Article-Noun-Verb-Conjunction-Article-Noun-Verb", structure: [['Article', 'Noun', 'Verb', 'Conjunction', 'Article', 'Noun', 'Verb']] }, // The dog barks and the cat sleeps.
+  { name: "Adjective-Noun-Conjunction-Adjective-Noun-Verb", structure: [['Adjective', 'Noun', 'Conjunction', 'Adjective', 'Noun', 'Verb']]}, // Red cars and blue boats move.
+  { name: "Pronoun-Verb-Noun-Conjunction-Pronoun-Verb-Noun", structure: [['Pronoun', 'Verb', 'Noun', 'Conjunction', 'Pronoun', 'Verb', 'Noun']]}, // I like tea and he likes coffee.
+
+  // Simple imperatives / fragments
+  { name: "Verb-Noun", structure: [['Verb', 'Noun']] }, // Eat food. Read book.
+  { name: "Verb-Pronoun", structure: [['Verb', 'Pronoun']] }, // Help them. See us.
+  { name: "Verb-Article-Noun", structure: [['Verb', 'Article', 'Noun']]}, // Take a break. Read the book.
+  { name: "Verb-Adjective-Noun", structure: [['Verb', 'Adjective', 'Noun']]}, // Find big treasure. Make good food.
+  { name: "Article-Noun", structure: [['Article', 'Noun']]}, // A cat. The sun. (Fragment)
+
+  // Specific "to be" verb patterns (Is, Are, Was, Were, etc. are just 'Verb' category)
+  { name: "Noun-Is-Noun", structure: [['Noun', 'Verb', 'Noun']] }, // Max is a dog. Apples are fruit. (Verb would be 'is'/'are')
+  { name: "Article-Noun-Is-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun']] }, // The cat is an animal.
+  { name: "Pronoun-Is-Noun", structure: [['Pronoun', 'Verb', 'Noun']] }, // She is a doctor. It is a game.
+  { name: "Pronoun-Is-Article-Noun", structure: [['Pronoun', 'Verb', 'Article', 'Noun']] }, // He is a man. They are a team.
+  { name: "Article-Noun-Is-Adjective", structure: [['Article', 'Noun', 'Verb', 'Adjective']] }, // The car is red. An apple is sweet. (Covered by general S-V-Adj)
+  { name: "Adjective-Noun-Is-Adjective", structure: [['Adjective', 'Noun', 'Verb', 'Adjective']]}, // Big dog is friendly.
   
-  // Patterns with Prepositions
-  { name: "Pronoun-Verb-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Preposition', 'Article', 'Noun']] }, // He ran to the park
-  { name: "Noun-Verb-Preposition-Noun", structure: [['Noun', 'Verb', 'Preposition', 'Noun']] }, // Cat sleeps on bed
-  { name: "Article-Noun-Verb-Preposition-Article-Noun", structure: [['Article', 'Noun', 'Verb', 'Preposition', 'Article', 'Noun']] }, // The dog ran under the table
-  { name: "Verb-Preposition-Noun", structure: [['Verb', 'Preposition', 'Noun']]}, // Go to school
-  { name: "Verb-Preposition-Article-Noun", structure: [['Verb', 'Preposition', 'Article', 'Noun']]}, // Look at the sky
-  { name: "Noun-Preposition-Noun", structure: [['Noun', 'Preposition', 'Noun']]}, // Book on table (common fragment)
-  { name: "Article-Noun-Preposition-Article-Noun", structure: [['Article', 'Noun', 'Preposition', 'Article', 'Noun']]}, // The cat in the hat
+  // More varied structures
+  { name: "Pronoun-Verb-Article-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Article', 'Adjective', 'Noun']]}, // I see a beautiful bird. We need a new plan.
+  { name: "Noun-Verb-Article-Adjective-Noun", structure: [['Noun', 'Verb', 'Article', 'Adjective', 'Noun']]}, // People want good weather.
+  { name: "Article-Adjective-Noun-Verb-Article-Noun", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Article', 'Noun']]}, // The old man tells a story.
+  { name: "Article-Noun-Adverb-Verb-Adjective", structure: [['Article', 'Noun', 'Adverb', 'Verb', 'Adjective']]}, // The sun always shines bright.
+  { name: "Pronoun-Adverb-Verb-Article-Noun", structure: [['Pronoun', 'Adverb', 'Verb', 'Article', 'Noun']]}, // She often reads a book.
+  { name: "Noun-Verb-Pronoun-Adverb", structure: [['Noun', 'Verb', 'Pronoun', 'Adverb']]}, // Children love them dearly.
+  { name: "Verb-Noun-Preposition-Article-Noun", structure: [['Verb', 'Noun', 'Preposition', 'Article', 'Noun']]}, // Take food to the party.
+  { name: "Article-Noun-Verb-Adjective-Preposition-Noun", structure: [['Article', 'Noun', 'Verb', 'Adjective', 'Preposition', 'Noun']]}, // The cat is content on bed.
+  { name: "Pronoun-Verb-Adverb-Adjective", structure: [['Pronoun', 'Verb', 'Adverb', 'Adjective']]}, // She is very happy. (e.g. is very happy)
+  { name: "Noun-Verb-Adverb-Adjective", structure: [['Noun', 'Verb', 'Adverb', 'Adjective']]}, // Food tastes really good.
+  
+  // Longer and more complex combinations
+  { name: "Article-Adjective-Noun-Verb-Article-Adjective-Noun", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Article', 'Adjective', 'Noun']]}, // The small cat sees the big dog.
+  { name: "Pronoun-Verb-Noun-Preposition-Article-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Noun', 'Preposition', 'Article', 'Adjective', 'Noun']]}, // She put books in the big bag.
+  { name: "Article-Noun-Verb-Noun-Conjunction-Noun-Verb-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun', 'Conjunction', 'Noun', 'Verb', 'Noun']] }, // The boy reads books and the girl reads stories.
+  { name: "Pronoun-Verb-Adjective-Noun-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Adjective', 'Noun', 'Preposition', 'Article', 'Noun']] }, // I want a new game for the party.
+  { name: "Article-Noun-Verb-Adverb-Preposition-Article-Adjective-Noun", structure: [['Article', 'Noun', 'Verb', 'Adverb', 'Preposition', 'Article', 'Adjective', 'Noun']] }, // The cat jumped quickly over the tall fence.
+  { name: "Pronoun-Verb-Conjunction-Verb-Article-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Conjunction', 'Verb', 'Article', 'Adjective', 'Noun']] }, // I will sing and play a happy song.
+  { name: "Noun-Adverb-Verb-Adjective-Conjunction-Noun-Verb-Well", structure: [['Noun', 'Adverb', 'Verb', 'Adjective', 'Conjunction', 'Noun', 'Verb', 'Adverb']] }, // Early birds sing sweetly and late worms sleep soundly. (Adverb 'Well' is just 'Adverb')
 
-  // Longer patterns
-  { name: "Article-Adjective-Noun-Verb-Adverb", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Adverb']] }, // The big dog runs quickly
-  { name: "Pronoun-Verb-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Adjective', 'Noun']] }, // She likes red apples
-  { name: "Article-Noun-Verb-Adjective-Noun", structure: [['Article', 'Noun', 'Verb', 'Adjective', 'Noun']] }, // The boy found a small toy
-  { name: "Pronoun-Verb-Noun-Adverb", structure: [['Pronoun', 'Verb', 'Noun', 'Adverb']]}, // I eat food slowly
-  { name: "Article-Adjective-Noun-Verb-Article-Adjective-Noun", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Article', 'Adjective', 'Noun']]}, // The small cat sees the big dog
-  { name: "Pronoun-Verb-Adverb-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Adverb', 'Preposition', 'Article', 'Noun']]}, // She walked quickly to the store
-
-  // Simple imperatives
-  { name: "Verb-Noun", structure: [['Verb', 'Noun']] }, // e.g. Eat food
-  { name: "Verb-Pronoun", structure: [['Verb', 'Pronoun']] }, // e.g. Help them
-  // { name: "Verb-Adjective", structure: [['Verb', 'Adjective']] }, // e.g. Be happy -- REMOVED to make "Enjoy Heavy" invalid
-
-  // Two-word sentences
-  { name: "Noun-Verb", structure: [['Noun', 'Verb']] }, // Birds fly
-  { name: "Pronoun-Verb", structure: [['Pronoun', 'Verb']] }, // It works
-  { name: "Adjective-Noun", structure: [['Adjective', 'Noun']] }, // Red car. (fragment, but common)
-
-  // Patterns with conjunctions (basic) - these can get complex, keeping them simple
-  { name: "Noun-Verb-Conjunction-Noun-Verb", structure: [['Noun', 'Verb', 'Conjunction', 'Noun', 'Verb']] }, // Dogs bark and cats meow
-  { name: "Pronoun-Verb-Conjunction-Pronoun-Verb", structure: [['Pronoun', 'Verb', 'Conjunction', 'Pronoun', 'Verb']] }, // I run and he walks
-  { name: "Noun-Conjunction-Noun-Verb", structure: [['Noun', 'Conjunction', 'Noun', 'Verb']]}, // Cat and dog play
-  { name: "Verb-Conjunction-Verb", structure: [['Verb', 'Conjunction', 'Verb']]}, // Run and jump
-  { name: "Adjective-Conjunction-Adjective", structure: [['Adjective', 'Conjunction', 'Adjective']]}, // Big and tall (fragment)
-
-  // More variety
-  { name: "Adjective-Noun-Verb", structure: [['Adjective', 'Noun', 'Verb']] }, // e.g. Big dogs bark.
-  { name: "Adverb-Adjective-Noun", structure: [['Adverb', 'Adjective', 'Noun']] }, // e.g. Very happy child. (can be part of a sentence)
-  { name: "Noun-Is-Adjective", structure: [['Noun', 'Verb', 'Adjective']] }, // (Verb must be 'Is' or 'Are' typically) e.g. Sky is blue.
-  { name: "Noun-Is-Noun", structure: [['Noun', 'Verb', 'Noun']] }, // (Verb must be 'Is' or 'Are' typically) e.g. Max is a dog.
-  { name: "Article-Noun-Is-Adjective", structure: [['Article', 'Noun', 'Verb', 'Adjective']] }, // The car is red
-  { name: "Pronoun-Is-Adjective", structure: [['Pronoun', 'Verb', 'Adjective']] }, // It is good.
-  { name: "Pronoun-Is-Noun", structure: [['Pronoun', 'Verb', 'Noun']] }, // She is a doctor.
-  { name: "Pronoun-Is-Article-Noun", structure: [['Pronoun', 'Verb', 'Article', 'Noun']] }, // He is a man.
-
-
-  // Question fragments (might be too complex for simple validation but good for AI suggestions)
-  // { name: "Question-Word-Noun-Verb", structure: [['Pronoun', 'Noun', 'Verb']] }, // e.g. What (Pronoun) time (Noun) is (Verb) it (Pronoun)?
+  // Patterns with 'Unknown' as a wildcard (use sparingly if needed for flexibility, but generally avoid)
+  // { name: "Noun-Verb-Unknown", structure: [['Noun', 'Verb', 'Unknown']] }, 
 ];
 
 
@@ -502,5 +523,3 @@ export const SAME_LETTER_GROUP_MIN_LENGTH = 3;
 // If nanoid causes issues with server components/Next.js build, a simpler unique ID generator can be used.
 // For example: export const generateId = () => Math.random().toString(36).substr(2, 9);
 // But nanoid is generally fine.
-
-    
