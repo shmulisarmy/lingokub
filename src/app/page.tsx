@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useGameLogic } from '@/hooks/use-game-logic';
@@ -7,9 +8,10 @@ import { GameControls } from '@/components/game-controls';
 import { StatusDisplay } from '@/components/status-display';
 import { AIPanel } from '@/components/ai-panel';
 import type { WordCard as WordCardType, GridCell, SelectedCardInfo } from '@/types';
-import { DndProvider } from 'react-dnd'; // If using react-dnd
-import { HTML5Backend } from 'react-dnd-html5-backend'; // If using react-dnd
+// import { DndProvider } from 'react-dnd'; // If using react-dnd
+// import { HTML5Backend } from 'react-dnd-html5-backend'; // If using react-dnd
 import { useEffect } from 'react';
+import { Button } from '@/components/ui/button';
 
 
 export default function LexicaLabyrinthPage() {
@@ -21,9 +23,9 @@ export default function LexicaLabyrinthPage() {
     removeCardFromBoard,
     drawCard,
     endTurn,
-    handleDragStart, // Renamed from useGameLogic to avoid conflict
-    handleDrop,      // Renamed from useGameLogic
-    setDraggedItem,   // Expose from useGameLogic for DND handling
+    handleDragStart,
+    handleDrop,
+    setDraggedItem,
   } = useGameLogic();
 
   const {
@@ -41,9 +43,6 @@ export default function LexicaLabyrinthPage() {
 
   const currentPlayer = players[currentPlayerIndex];
 
-  // Drag and drop handlers using native HTML DND for simplicity first
-  // These will call the hook's handleDragStart and handleDrop
-
   const onBoardCardDragStart = (card: GridCell, rowIndex: number, colIndex: number) => {
     const itemInfo: SelectedCardInfo = { card, source: 'board', boardCoordinates: { row: rowIndex, col: colIndex } };
     handleDragStart(itemInfo);
@@ -60,9 +59,9 @@ export default function LexicaLabyrinthPage() {
 
   const onCellClick = (rowIndex: number, colIndex: number) => {
     const cell = gameBoard[rowIndex][colIndex];
-    if (cell) { // Clicked on an existing card on the board
+    if (cell) {
       selectCard({ card: cell, source: 'board', boardCoordinates: { row: rowIndex, col: colIndex } });
-    } else { // Clicked on an empty cell
+    } else {
       if (selectedCardInfo) {
         placeCardOnBoard(rowIndex, colIndex);
       }
@@ -73,7 +72,6 @@ export default function LexicaLabyrinthPage() {
     selectCard({ card, source: 'hand', handIndex });
   };
   
-  // Clear draggedItem on drag end to prevent issues if drop doesn't occur on a valid target
   useEffect(() => {
     const dragEndHandler = () => setDraggedItem(null);
     document.addEventListener('dragend', dragEndHandler);
@@ -106,7 +104,7 @@ export default function LexicaLabyrinthPage() {
           onCellDrop={onCellDrop}
           onCardRemove={removeCardFromBoard}
           onCardDragStart={onBoardCardDragStart}
-          setDraggedItem={setDraggedItem} // Pass this down
+          setDraggedItem={setDraggedItem}
         />
 
         <div className="mt-6">
@@ -118,7 +116,7 @@ export default function LexicaLabyrinthPage() {
             selectedCardInfo={selectedCardInfo}
             onCardSelect={onHandCardSelect}
             onCardDragStart={onHandCardDragStart}
-            setDraggedItem={setDraggedItem} // Pass this down
+            setDraggedItem={setDraggedItem}
           />
         </div>
 
@@ -126,19 +124,16 @@ export default function LexicaLabyrinthPage() {
           onFinishTurn={endTurn}
           onDrawCard={drawCard}
           onNewGame={newGame}
-          canFinishTurn={actionsThisTurn > 0 || deck.length === 0} // Allow finish if deck empty even with 0 actions
+          canFinishTurn={actionsThisTurn > 0 || deck.length === 0}
           isGameWon={isGameWon}
           deckEmpty={deck.length === 0}
-          // Placeholder AI handlers
-          // onGrammarInsight={() => console.log("Grammar Insight Clicked")}
-          // onSentenceSuggestions={() => console.log("Sentence Suggestion Clicked")}
         />
         
         <AIPanel gameBoard={gameBoard} currentHand={currentPlayer.hand} />
         
         {isGameWon && winner && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-background p-8 rounded-lg shadow-xl text-center">
+            <div className="bg-card p-8 rounded-lg shadow-xl text-center">
               <h2 className="text-3xl font-bold text-primary mb-4 font-headline">
                 🎉 {winner.name} Wins! 🎉
               </h2>
@@ -149,9 +144,11 @@ export default function LexicaLabyrinthPage() {
       </main>
       <footer className="w-full max-w-5xl mt-8 text-center text-xs text-muted-foreground">
         <p>LexicaLabyrinth - A word placement game.</p>
-        <p>Tip: Form grammatical sentences or groups of 3+ same-type words horizontally.</p>
+        <p>Tip: Form grammatical sentences or groups of 3+ words starting with the same letter horizontally.</p>
       </footer>
     </div>
     // </DndProvider>
   );
 }
+
+    
