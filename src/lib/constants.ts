@@ -110,7 +110,7 @@ export const INITIAL_DECK: WordCard[] = [
   { id: nanoid(), text: 'Zebra', categories: ['Noun'] }, { id: nanoid(), text: 'Zoo', categories: ['Noun'] },
   { id: nanoid(), text: 'Zone', categories: ['Noun'] }, { id: nanoid(), text: 'Zero', categories: ['Noun'] }, // Also Adjective
 
-  // Verbs (Existing + some new for variety)
+  // Verbs (Main verbs)
   { id: nanoid(), text: 'Ask', categories: ['Verb'] }, { id: nanoid(), text: 'Act', categories: ['Verb'] },
   { id: nanoid(), text: 'Add', categories: ['Verb'] },{ id: nanoid(), text: 'Arrive', categories: ['Verb'] },
   { id: nanoid(), text: 'Agree', categories: ['Verb'] }, { id: nanoid(), text: 'Allow', categories: ['Verb'] },
@@ -122,7 +122,7 @@ export const INITIAL_DECK: WordCard[] = [
   { id: nanoid(), text: 'Cook', categories: ['Verb'] }, { id: nanoid(), text: 'Clean', categories: ['Verb'] }, // Also Adjective
   { id: nanoid(), text: 'Climb', categories: ['Verb'] }, { id: nanoid(), text: 'Change', categories: ['Verb'] },
   { id: nanoid(), text: 'Choose', categories: ['Verb'] },
-  { id: nanoid(), text: 'Do', categories: ['Verb'] }, { id: nanoid(), text: 'Drink', categories: ['Verb'] },
+  { id: nanoid(), text: 'Drink', categories: ['Verb'] },
   { id: nanoid(), text: 'Drive', categories: ['Verb'] }, { id: nanoid(), text: 'Draw', categories: ['Verb'] },
   { id: nanoid(), text: 'Dance', categories: ['Verb'] }, { id: nanoid(), text: 'Decide', categories: ['Verb'] },
   { id: nanoid(), text: 'Dream', categories: ['Verb'] }, // Also Noun
@@ -137,11 +137,11 @@ export const INITIAL_DECK: WordCard[] = [
   { id: nanoid(), text: 'Give', categories: ['Verb'] }, { id: nanoid(), text: 'Grow', categories: ['Verb'] },
   { id: nanoid(), text: 'Guess', categories: ['Verb'] }, { id: nanoid(), text: 'Gain', categories: ['Verb'] },
   { id: nanoid(), text: 'Guide', categories: ['Verb'] },
-  { id: nanoid(), text: 'Have', categories: ['Verb'] }, { id: nanoid(), text: 'Help', categories: ['Verb'] },
+  { id: nanoid(), text: 'Help', categories: ['Verb'] },
   { id: nanoid(), text: 'Hold', categories: ['Verb'] }, { id: nanoid(), text: 'Hear', categories: ['Verb'] },
   { id: nanoid(), text: 'Hope', categories: ['Verb'] }, { id: nanoid(), text: 'Happen', categories: ['Verb'] }, // Also Noun
   { id: nanoid(), text: 'Hit', categories: ['Verb'] },
-  { id: nanoid(), text: 'Is', categories: ['Verb'] }, { id: nanoid(), text: 'Imagine', categories: ['Verb'] },
+  { id: nanoid(), text: 'Imagine', categories: ['Verb'] },
   { id: nanoid(), text: 'Invite', categories: ['Verb'] }, { id: nanoid(), text: 'Inform', categories: ['Verb'] },
   { id: nanoid(), text: 'Improve', categories: ['Verb'] },
   { id: nanoid(), text: 'Jump', categories: ['Verb'] }, { id: nanoid(), text: 'Join', categories: ['Verb'] },
@@ -191,8 +191,32 @@ export const INITIAL_DECK: WordCard[] = [
   { id: nanoid(), text: 'Yawn', categories: ['Verb'] },
   { id: nanoid(), text: 'Zip', categories: ['Verb'] }, { id: nanoid(), text: 'Zoom', categories: ['Verb'] },
 
+  // Auxiliary Verbs
+  { id: nanoid(), text: 'Do', categories: ['Verb'] }, { id: nanoid(), text: 'Do', categories: ['Verb'] },
+  { id: nanoid(), text: 'Does', categories: ['Verb'] }, { id: nanoid(), text: 'Does', categories: ['Verb'] },
+  { id: nanoid(), text: 'Did', categories: ['Verb'] }, { id: nanoid(), text: 'Did', categories: ['Verb'] },
+  { id: nanoid(), text: 'Did', categories: ['Verb'] },
+  { id: nanoid(), text: 'Am', categories: ['Verb'] }, { id: nanoid(), text: 'Is', categories: ['Verb'] },
+  { id: nanoid(), text: 'Is', categories: ['Verb'] }, { id: nanoid(), text: 'Is', categories: ['Verb'] },
+  { id: nanoid(), text: 'Are', categories: ['Verb'] }, { id: nanoid(), text: 'Are', categories: ['Verb'] },
+  { id: nanoid(), text: 'Was', categories: ['Verb'] }, { id: nanoid(), text: 'Was', categories: ['Verb'] },
+  { id: nanoid(), text: 'Were', categories: ['Verb'] }, { id: nanoid(), text: 'Were', categories: ['Verb'] },
+  { id: nanoid(), text: 'Be', categories: ['Verb'] }, { id: nanoid(), text: 'Been', categories: ['Verb'] },
+  { id: nanoid(), text: 'Has', categories: ['Verb'] }, { id: nanoid(), text: 'Has', categories: ['Verb'] },
+  { id: nanoid(), text: 'Have', categories: ['Verb'] }, { id: nanoid(), text: 'Have', categories: ['Verb'] },
+  { id: nanoid(), text: 'Have', categories: ['Verb'] },
+  { id: nanoid(), text: 'Had', categories: ['Verb'] }, { id: nanoid(), text: 'Had', categories: ['Verb'] },
+  { id: nanoid(), text: 'Can', categories: ['Verb'] }, { id: nanoid(), text: 'Can', categories: ['Verb'] },
+  { id: nanoid(), text: 'Could', categories: ['Verb'] }, { id: nanoid(), text: 'Could', categories: ['Verb'] },
+  { id: nanoid(), text: 'Will', categories: ['Verb'] }, { id: nanoid(), text: 'Will', categories: ['Verb'] },
+  { id: nanoid(), text: 'Would', categories: ['Verb'] }, { id: nanoid(), text: 'Would', categories: ['Verb'] },
+  { id: nanoid(), text: 'Should', categories: ['Verb'] }, { id: nanoid(), text: 'Should', categories: ['Verb'] },
+  { id: nanoid(), text: 'May', categories: ['Verb'] }, { id: nanoid(), text: 'May', categories: ['Verb'] },
+  { id: nanoid(), text: 'Might', categories: ['Verb'] }, { id: nanoid(), text: 'Might', categories: ['Verb'] },
+  { id: nanoid(), text: 'Must', categories: ['Verb'] }, { id: nanoid(), text: 'Must', categories: ['Verb'] },
 
-  // Adjectives (Existing + some new for variety)
+
+  // Adjectives
   { id: nanoid(), text: 'Angry', categories: ['Adjective'] }, { id: nanoid(), text: 'Able', categories: ['Adjective'] },
   { id: nanoid(), text: 'Awful', categories: ['Adjective'] }, { id: nanoid(), text: 'Active', categories: ['Adjective'] },
   { id: nanoid(), text: 'Amazing', categories: ['Adjective'] },
@@ -270,7 +294,7 @@ export const INITIAL_DECK: WordCard[] = [
   { id: nanoid(), text: 'Zany', categories: ['Adjective'] }, { id: nanoid(), text: 'Zealous', categories: ['Adjective'] },
   { id: nanoid(), text: 'Zero', categories: ['Adjective'] }, // Also Noun
 
-  // Adverbs (Existing + some new for variety)
+  // Adverbs
   { id: nanoid(), text: 'Always', categories: ['Adverb'] }, { id: nanoid(), text: 'Almost', categories: ['Adverb'] },
   { id: nanoid(), text: 'Again', categories: ['Adverb'] }, { id: nanoid(), text: 'Also', categories: ['Adverb'] },
   { id: nanoid(), text: 'Actually', categories: ['Adverb'] }, { id: nanoid(), text: 'Abroad', categories: ['Adverb'] },
@@ -336,17 +360,17 @@ export const INITIAL_DECK: WordCard[] = [
   { id: nanoid(), text: 'Yearly', categories: ['Adverb'] },
   { id: nanoid(), text: 'Zestily', categories: ['Adverb'] },
 
-  // Pronouns (Existing + some new for variety)
+  // Pronouns
   { id: nanoid(), text: 'I', categories: ['Pronoun'] }, { id: nanoid(), text: 'You', categories: ['Pronoun'] },
   { id: nanoid(), text: 'He', categories: ['Pronoun'] }, { id: nanoid(), text: 'She', categories: ['Pronoun'] },
   { id: nanoid(), text: 'It', categories: ['Pronoun'] }, { id: nanoid(), text: 'We', categories: ['Pronoun'] },
   { id: nanoid(), text: 'They', categories: ['Pronoun'] }, { id: nanoid(), text: 'Me', categories: ['Pronoun'] },
   { id: nanoid(), text: 'Him', categories: ['Pronoun'] }, { id: nanoid(), text: 'Her', categories: ['Pronoun'] },
   { id: nanoid(), text: 'Us', categories: ['Pronoun'] }, { id: nanoid(), text: 'Them', categories: ['Pronoun'] },
-  { id: nanoid(), text: 'My', categories: ['Pronoun'] }, { id: nanoid(), text: 'Your', categories: ['Pronoun'] }, // Possessive Adjectives/Determiners, often grouped with Pronouns in games
+  { id: nanoid(), text: 'My', categories: ['Pronoun'] }, { id: nanoid(), text: 'Your', categories: ['Pronoun'] }, 
   { id: nanoid(), text: 'His', categories: ['Pronoun'] }, { id: nanoid(), text: 'Its', categories: ['Pronoun'] },
   { id: nanoid(), text: 'Our', categories: ['Pronoun'] }, { id: nanoid(), text: 'Their', categories: ['Pronoun'] },
-  { id: nanoid(), text: 'This', categories: ['Pronoun'] }, { id: nanoid(), text: 'That', categories: ['Pronoun'] }, // Also Conjunction
+  { id: nanoid(), text: 'This', categories: ['Pronoun'] }, { id: nanoid(), text: 'That', categories: ['Pronoun'] }, 
   { id: nanoid(), text: 'These', categories: ['Pronoun'] }, { id: nanoid(), text: 'Those', categories: ['Pronoun'] },
   { id: nanoid(), text: 'Who', categories: ['Pronoun'] }, { id: nanoid(), text: 'What', categories: ['Pronoun'] },
   { id: nanoid(), text: 'Which', categories: ['Pronoun'] }, { id: nanoid(), text: 'Whom', categories: ['Pronoun'] },
@@ -359,7 +383,7 @@ export const INITIAL_DECK: WordCard[] = [
   { id: nanoid(), text: 'Something', categories: ['Pronoun'] }, { id: nanoid(), text: 'Anything', categories: ['Pronoun'] },
   { id: nanoid(), text: 'Everything', categories: ['Pronoun'] }, { id: nanoid(), text: 'Nothing', categories: ['Pronoun'] },
   
-  // Multiple copies of common Articles
+  // Articles
   { id: nanoid(), text: 'A', categories: ['Article'] }, { id: nanoid(), text: 'A', categories: ['Article'] },
   { id: nanoid(), text: 'A', categories: ['Article'] }, { id: nanoid(), text: 'A', categories: ['Article'] },
   { id: nanoid(), text: 'A', categories: ['Article'] }, { id: nanoid(), text: 'A', categories: ['Article'] },
@@ -370,31 +394,31 @@ export const INITIAL_DECK: WordCard[] = [
   { id: nanoid(), text: 'The', categories: ['Article'] }, { id: nanoid(), text: 'The', categories: ['Article'] },
   { id: nanoid(), text: 'The', categories: ['Article'] }, { id: nanoid(), text: 'The', categories: ['Article'] },
 
-  // Prepositions (Existing + some new for variety, and more copies of common ones)
+  // Prepositions
   { id: nanoid(), text: 'In', categories: ['Preposition'] }, { id: nanoid(), text: 'In', categories: ['Preposition'] },
   { id: nanoid(), text: 'On', categories: ['Preposition'] }, { id: nanoid(), text: 'On', categories: ['Preposition'] },
   { id: nanoid(), text: 'At', categories: ['Preposition'] }, { id: nanoid(), text: 'At', categories: ['Preposition'] },
   { id: nanoid(), text: 'With', categories: ['Preposition'] }, { id: nanoid(), text: 'With', categories: ['Preposition'] },
   { id: nanoid(), text: 'By', categories: ['Preposition'] }, { id: nanoid(), text: 'By', categories: ['Preposition'] },
-  { id: nanoid(), text: 'For', categories: ['Preposition'] }, { id: nanoid(), text: 'For', categories: ['Preposition'] }, // Also Conjunction
+  { id: nanoid(), text: 'For', categories: ['Preposition'] }, { id: nanoid(), text: 'For', categories: ['Preposition'] }, 
   { id: nanoid(), text: 'From', categories: ['Preposition'] }, { id: nanoid(), text: 'From', categories: ['Preposition'] },
   { id: nanoid(), text: 'To', categories: ['Preposition'] }, { id: nanoid(), text: 'To', categories: ['Preposition'] },
   { id: nanoid(), text: 'Up', categories: ['Preposition'] }, { id: nanoid(), text: 'Down', categories: ['Preposition'] },
-  { id: nanoid(), text: 'Over', categories: ['Preposition'] }, { id: nanoid(), text: 'Under', categories: ['Preposition'] }, // Also Adverb
-  { id: nanoid(), text: 'Near', categories: ['Preposition'] }, { id: nanoid(), text: 'About', categories: ['Preposition'] }, // Also Adjective, Adverb
-  { id: nanoid(), text: 'Above', categories: ['Preposition'] }, { id: nanoid(), text: 'After', categories: ['Preposition'] }, // Also Adverb, Conjunction
+  { id: nanoid(), text: 'Over', categories: ['Preposition'] }, { id: nanoid(), text: 'Under', categories: ['Preposition'] }, 
+  { id: nanoid(), text: 'Near', categories: ['Preposition'] }, { id: nanoid(), text: 'About', categories: ['Preposition'] }, 
+  { id: nanoid(), text: 'Above', categories: ['Preposition'] }, { id: nanoid(), text: 'After', categories: ['Preposition'] }, 
   { id: nanoid(), text: 'Along', categories: ['Preposition'] }, { id: nanoid(), text: 'Around', categories: ['Preposition'] },
-  { id: nanoid(), text: 'Before', categories: ['Preposition'] }, { id: nanoid(), text: 'Behind', categories: ['Preposition'] }, // Also Adverb, Conjunction
+  { id: nanoid(), text: 'Before', categories: ['Preposition'] }, { id: nanoid(), text: 'Behind', categories: ['Preposition'] }, 
   { id: nanoid(), text: 'Below', categories: ['Preposition'] }, { id: nanoid(), text: 'Beside', categories: ['Preposition'] },
   { id: nanoid(), text: 'Between', categories: ['Preposition'] }, { id: nanoid(), text: 'During', categories: ['Preposition'] },
-  { id: nanoid(), text: 'Inside', categories: ['Preposition'] }, { id: nanoid(), text: 'Into', categories: ['Preposition'] }, // Also Adverb
+  { id: nanoid(), text: 'Inside', categories: ['Preposition'] }, { id: nanoid(), text: 'Into', categories: ['Preposition'] }, 
   { id: nanoid(), text: 'Onto', categories: ['Preposition'] }, { id: nanoid(), text: 'Out', categories: ['Preposition'] },
-  { id: nanoid(), text: 'Past', categories: ['Preposition'] }, { id: nanoid(), text: 'Since', categories: ['Preposition'] }, // Also Adverb, Conjunction
+  { id: nanoid(), text: 'Past', categories: ['Preposition'] }, { id: nanoid(), text: 'Since', categories: ['Preposition'] }, 
   { id: nanoid(), text: 'Through', categories: ['Preposition'] }, { id: nanoid(), text: 'Toward', categories: ['Preposition'] },
-  { id: nanoid(), text: 'Until', categories: ['Preposition'] }, { id: nanoid(), text: 'Upon', categories: ['Preposition'] }, // Also Adverb, Conjunction
+  { id: nanoid(), text: 'Until', categories: ['Preposition'] }, { id: nanoid(), text: 'Upon', categories: ['Preposition'] }, 
 
 
-  // Conjunctions (Existing + some new for variety, and more copies of common ones)
+  // Conjunctions
   { id: nanoid(), text: 'And', categories: ['Conjunction'] }, { id: nanoid(), text: 'And', categories: ['Conjunction'] },
   { id: nanoid(), text: 'And', categories: ['Conjunction'] }, { id: nanoid(), text: 'And', categories: ['Conjunction'] },
   { id: nanoid(), text: 'And', categories: ['Conjunction'] }, { id: nanoid(), text: 'And', categories: ['Conjunction'] },
@@ -402,176 +426,169 @@ export const INITIAL_DECK: WordCard[] = [
   { id: nanoid(), text: 'But', categories: ['Conjunction'] }, { id: nanoid(), text: 'But', categories: ['Conjunction'] },
   { id: nanoid(), text: 'Or', categories: ['Conjunction'] }, { id: nanoid(), text: 'Or', categories: ['Conjunction'] },
   { id: nanoid(), text: 'Or', categories: ['Conjunction'] }, { id: nanoid(), text: 'Or', categories: ['Conjunction'] },
-  { id: nanoid(), text: 'So', categories: ['Conjunction'] }, { id: nanoid(), text: 'So', categories: ['Conjunction'] }, // Also Adverb
-  { id: nanoid(), text: 'For', categories: ['Conjunction'] }, { id: nanoid(), text: 'For', categories: ['Conjunction'] }, // Also Preposition
-  { id: nanoid(), text: 'Nor', categories: ['Conjunction'] }, { id: nanoid(), text: 'Yet', categories: ['Conjunction'] }, // Also Adverb
-  { id: nanoid(), text: 'After', categories: ['Conjunction'] }, { id: nanoid(), text: 'Although', categories: ['Conjunction'] }, // Also Preposition, Adverb
+  { id: nanoid(), text: 'So', categories: ['Conjunction'] }, { id: nanoid(), text: 'So', categories: ['Conjunction'] }, 
+  { id: nanoid(), text: 'For', categories: ['Conjunction'] }, { id: nanoid(), text: 'For', categories: ['Conjunction'] }, 
+  { id: nanoid(), text: 'Nor', categories: ['Conjunction'] }, { id: nanoid(), text: 'Yet', categories: ['Conjunction'] }, 
+  { id: nanoid(), text: 'After', categories: ['Conjunction'] }, { id: nanoid(), text: 'Although', categories: ['Conjunction'] }, 
   { id: nanoid(), text: 'As', categories: ['Conjunction'] }, { id: nanoid(), text: 'Because', categories: ['Conjunction'] },
-  { id: nanoid(), text: 'Before', categories: ['Conjunction'] }, { id: nanoid(), text: 'If', categories: ['Conjunction'] }, // Also Preposition, Adverb
-  { id: nanoid(), text: 'Once', categories: ['Conjunction'] }, { id: nanoid(), text: 'Since', categories: ['Conjunction'] }, // Also Adverb
-  { id: nanoid(), text: 'Than', categories: ['Conjunction'] }, { id: nanoid(), text: 'That', categories: ['Conjunction'] }, // Also Preposition, Adverb
-  { id: nanoid(), text: 'Though', categories: ['Conjunction'] }, { id: nanoid(), text: 'Unless', categories: ['Conjunction'] }, // Also Pronoun
-  { id: nanoid(), text: 'Until', categories: ['Conjunction'] }, { id: nanoid(), text: 'When', categories: ['Conjunction'] }, // Also Preposition, Adverb
-  { id: nanoid(), text: 'Where', categories: ['Conjunction'] }, { id: nanoid(), text: 'While', categories: ['Conjunction'] }, // Also Adverb
+  { id: nanoid(), text: 'Before', categories: ['Conjunction'] }, { id: nanoid(), text: 'If', categories: ['Conjunction'] }, 
+  { id: nanoid(), text: 'Once', categories: ['Conjunction'] }, { id: nanoid(), text: 'Since', categories: ['Conjunction'] }, 
+  { id: nanoid(), text: 'Than', categories: ['Conjunction'] }, { id: nanoid(), text: 'That', categories: ['Conjunction'] }, 
+  { id: nanoid(), text: 'Though', categories: ['Conjunction'] }, { id: nanoid(), text: 'Unless', categories: ['Conjunction'] }, 
+  { id: nanoid(), text: 'Until', categories: ['Conjunction'] }, { id: nanoid(), text: 'When', categories: ['Conjunction'] }, 
+  { id: nanoid(), text: 'Where', categories: ['Conjunction'] }, { id: nanoid(), text: 'While', categories: ['Conjunction'] }, 
   { id: nanoid(), text: 'However', categories: ['Conjunction', 'Adverb'] }, { id: nanoid(), text: 'Therefore', categories: ['Conjunction', 'Adverb'] },
   { id: nanoid(), text: 'Moreover', categories: ['Conjunction', 'Adverb'] }, { id: nanoid(), text: 'Nevertheless', categories: ['Conjunction', 'Adverb'] },
 ];
 
 export const SENTENCE_PATTERNS: SentencePattern[] = [
   // Basic patterns (S-V, S-V-O)
-  { name: "Pronoun-Verb", structure: [['Pronoun', 'Verb']] }, // I run. She thinks.
-  { name: "Article-Noun-Verb", structure: [['Article', 'Noun', 'Verb']] }, // The cat sleeps. A dog barks.
-  { name: "Noun-Verb", structure: [['Noun', 'Verb']] }, // Cats sleep. Dogs bark.
-  { name: "Pronoun-Verb-Noun", structure: [['Pronoun', 'Verb', 'Noun']] }, // I like cats. She reads books.
-  { name: "Pronoun-Verb-Pronoun", structure: [['Pronoun', 'Verb', 'Pronoun']] }, // You understand me. He saw her.
-  { name: "Article-Noun-Verb-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun']] }, // The cat chased mice. A boy threw balls.
-  { name: "Noun-Verb-Noun", structure: [['Noun', 'Verb', 'Noun']] }, // Dogs chase cats. Birds eat worms.
-  { name: "Pronoun-Verb-Article-Noun", structure: [['Pronoun', 'Verb', 'Article', 'Noun']] }, // She has a car. We need a plan.
-  { name: "Noun-Verb-Article-Noun", structure: [['Noun', 'Verb', 'Article', 'Noun']] }, // Man bites a dog. Child wants a toy.
+  { name: "Pronoun-Verb", structure: [['Pronoun', 'Verb']] }, 
+  { name: "Article-Noun-Verb", structure: [['Article', 'Noun', 'Verb']] }, 
+  { name: "Noun-Verb", structure: [['Noun', 'Verb']] }, 
+  { name: "Pronoun-Verb-Noun", structure: [['Pronoun', 'Verb', 'Noun']] }, 
+  { name: "Pronoun-Verb-Pronoun", structure: [['Pronoun', 'Verb', 'Pronoun']] }, 
+  { name: "Article-Noun-Verb-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun']] }, 
+  { name: "Noun-Verb-Noun", structure: [['Noun', 'Verb', 'Noun']] }, 
+  { name: "Pronoun-Verb-Article-Noun", structure: [['Pronoun', 'Verb', 'Article', 'Noun']] }, 
+  { name: "Noun-Verb-Article-Noun", structure: [['Noun', 'Verb', 'Article', 'Noun']] },
   
   // Patterns with Adjectives (S-V-Adj, Adj-N)
-  { name: "Pronoun-Verb-Adjective", structure: [['Pronoun', 'Verb', 'Adjective']] }, // It is good. She seems happy.
-  { name: "Article-Adjective-Noun", structure: [['Article', 'Adjective', 'Noun']] }, // The red car. A big dog. (Fragment, but common)
-  { name: "Noun-Verb-Adjective", structure: [['Noun', 'Verb', 'Adjective']] }, // Food is good. Sky is blue.
-  { name: "Article-Noun-Verb-Adjective", structure: [['Article', 'Noun', 'Verb', 'Adjective']] }, // The cat is black. A day was warm.
-  { name: "Adjective-Noun", structure: [['Adjective', 'Noun']] }, // Big dog. Red apple. (Fragment)
-  { name: "Adjective-Noun-Verb", structure: [['Adjective', 'Noun', 'Verb']] }, // Big dogs bark. Happy children play.
-  { name: "Article-Adjective-Noun-Verb", structure: [['Article', 'Adjective', 'Noun', 'Verb']] }, // The big dog barks. A happy child plays.
-  { name: "Pronoun-Verb-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Adjective', 'Noun']] }, // She likes red apples. He wants a new game.
-  { name: "Article-Noun-Verb-Adjective-Noun", structure: [['Article', 'Noun', 'Verb', 'Adjective', 'Noun']] }, // The boy found a small toy. A girl has pretty dolls.
+  { name: "Pronoun-Verb-Adjective", structure: [['Pronoun', 'Verb', 'Adjective']] }, 
+  { name: "Article-Adjective-Noun", structure: [['Article', 'Adjective', 'Noun']] }, 
+  { name: "Noun-Verb-Adjective", structure: [['Noun', 'Verb', 'Adjective']] }, 
+  { name: "Article-Noun-Verb-Adjective", structure: [['Article', 'Noun', 'Verb', 'Adjective']] }, 
+  { name: "Adjective-Noun", structure: [['Adjective', 'Noun']] }, 
+  { name: "Adjective-Noun-Verb", structure: [['Adjective', 'Noun', 'Verb']] }, 
+  { name: "Article-Adjective-Noun-Verb", structure: [['Article', 'Adjective', 'Noun', 'Verb']] }, 
+  { name: "Pronoun-Verb-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Adjective', 'Noun']] }, 
+  { name: "Article-Noun-Verb-Adjective-Noun", structure: [['Article', 'Noun', 'Verb', 'Adjective', 'Noun']] },
 
   // Patterns with Adverbs (S-V-Adv, S-Adv-V)
-  { name: "Pronoun-Verb-Adverb", structure: [['Pronoun', 'Verb', 'Adverb']] }, // She ran quickly. They spoke softly.
-  { name: "Noun-Verb-Adverb", structure: [['Noun', 'Verb', 'Adverb']] }, // Birds sing sweetly. Time flies fast.
-  { name: "Article-Noun-Verb-Adverb", structure: [['Article', 'Noun', 'Verb', 'Adverb']] }, // The dog runs quickly. A car moved slowly.
-  { name: "Pronoun-Adverb-Verb", structure: [['Pronoun', 'Adverb', 'Verb']] }, // I often run. She always smiles.
-  { name: "Noun-Adverb-Verb", structure: [['Noun', 'Adverb', 'Verb']] }, // Dogs often run. Stars brightly shine.
-  { name: "Adverb-Verb", structure: [['Adverb', 'Verb']] }, // Often run. Always smile. (Imperative fragment style)
-  { name: "Verb-Adverb", structure: [['Verb', 'Adverb']] }, // Run quickly. Speak clearly. (Imperative fragment)
-  { name: "Article-Adjective-Noun-Verb-Adverb", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Adverb']] }, // The big dog runs quickly. A small bird sang beautifully.
-  { name: "Pronoun-Verb-Noun-Adverb", structure: [['Pronoun', 'Verb', 'Noun', 'Adverb']]}, // I eat food slowly. She did work carefully.
-  { name: "Article-Adverb-Adjective-Noun", structure: [['Article', 'Adverb', 'Adjective', 'Noun']] }, // The very big house. An extremely fast car. (Fragment)
-  { name: "Adverb-Adjective-Noun", structure: [['Adverb', 'Adjective', 'Noun']] }, // Very happy child. Really good food. (Fragment)
-  { name: "Adverb-Verb-Noun", structure: [['Adverb', 'Verb', 'Noun']]}, // Always seek truth. Often find joy.
-  { name: "Adverb-Verb-Article-Noun", structure: [['Adverb', 'Verb', 'Article', 'Noun']]}, // Quickly eat the apple.
-  { name: "Adverb-Verb-Adjective", structure: [['Adverb', 'Verb', 'Adjective']]}, // Always be kind.
-  { name: "Adverb-Verb-Adverb", structure: [['Adverb', 'Verb', 'Adverb']]}, // Never run carelessly.
+  { name: "Pronoun-Verb-Adverb", structure: [['Pronoun', 'Verb', 'Adverb']] }, 
+  { name: "Noun-Verb-Adverb", structure: [['Noun', 'Verb', 'Adverb']] }, 
+  { name: "Article-Noun-Verb-Adverb", structure: [['Article', 'Noun', 'Verb', 'Adverb']] }, 
+  { name: "Pronoun-Adverb-Verb", structure: [['Pronoun', 'Adverb', 'Verb']] }, 
+  { name: "Noun-Adverb-Verb", structure: [['Noun', 'Adverb', 'Verb']] }, 
+  { name: "Adverb-Verb", structure: [['Adverb', 'Verb']] }, 
+  { name: "Verb-Adverb", structure: [['Verb', 'Adverb']] }, 
+  { name: "Article-Adjective-Noun-Verb-Adverb", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Adverb']] }, 
+  { name: "Pronoun-Verb-Noun-Adverb", structure: [['Pronoun', 'Verb', 'Noun', 'Adverb']]}, 
+  { name: "Article-Adverb-Adjective-Noun", structure: [['Article', 'Adverb', 'Adjective', 'Noun']] }, 
+  { name: "Adverb-Adjective-Noun", structure: [['Adverb', 'Adjective', 'Noun']] }, 
+  { name: "Adverb-Verb-Noun", structure: [['Adverb', 'Verb', 'Noun']]}, 
+  { name: "Adverb-Verb-Article-Noun", structure: [['Adverb', 'Verb', 'Article', 'Noun']]}, 
+  { name: "Adverb-Verb-Adjective", structure: [['Adverb', 'Verb', 'Adjective']]}, 
+  { name: "Adverb-Verb-Adverb", structure: [['Adverb', 'Verb', 'Adverb']]},
 
   // Patterns with Prepositions (S-V-PrepP, N-PrepP)
-  { name: "Pronoun-Verb-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Preposition', 'Article', 'Noun']] }, // He ran to the park. She looked at the moon.
-  { name: "Noun-Verb-Preposition-Noun", structure: [['Noun', 'Verb', 'Preposition', 'Noun']] }, // Cat sleeps on bed. Dog walks in park.
-  { name: "Article-Noun-Verb-Preposition-Article-Noun", structure: [['Article', 'Noun', 'Verb', 'Preposition', 'Article', 'Noun']] }, // The dog ran under the table. A bird flew over the house.
-  { name: "Verb-Preposition-Noun", structure: [['Verb', 'Preposition', 'Noun']]}, // Go to school. Look for help. (Imperative)
-  { name: "Verb-Preposition-Article-Noun", structure: [['Verb', 'Preposition', 'Article', 'Noun']]}, // Look at the sky. Jump over the fence. (Imperative)
-  { name: "Noun-Preposition-Noun", structure: [['Noun', 'Preposition', 'Noun']]}, // Book on table. Cat in box. (Fragment)
-  { name: "Article-Noun-Preposition-Article-Noun", structure: [['Article', 'Noun', 'Preposition', 'Article', 'Noun']]}, // The cat in the hat. A fish in the bowl. (Fragment)
-  { name: "Pronoun-Verb-Adverb-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Adverb', 'Preposition', 'Article', 'Noun']]}, // She walked quickly to the store. He looked carefully under the bed.
-  { name: "Pronoun-Verb-Noun-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Noun', 'Preposition', 'Article', 'Noun']] }, // I put the book on the table.
-  { name: "Article-Noun-Verb-Noun-Preposition-Article-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun', 'Preposition', 'Article', 'Noun']] }, // The girl gave a gift to the boy.
-  { name: "Verb-Noun-Preposition-Noun", structure: [['Verb', 'Noun', 'Preposition', 'Noun']]}, // Put food in bowl.
-  { name: "Noun-Preposition-Article-Noun-Verb", structure: [['Noun', 'Preposition', 'Article', 'Noun', 'Verb']]}, // Cat on the mat sleeps.
-  { name: "Pronoun-Verb-Preposition-Pronoun", structure: [['Pronoun', 'Verb', 'Preposition', 'Pronoun']]}, // I walk with him.
+  { name: "Pronoun-Verb-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Preposition', 'Article', 'Noun']] }, 
+  { name: "Noun-Verb-Preposition-Noun", structure: [['Noun', 'Verb', 'Preposition', 'Noun']] }, 
+  { name: "Article-Noun-Verb-Preposition-Article-Noun", structure: [['Article', 'Noun', 'Verb', 'Preposition', 'Article', 'Noun']] }, 
+  { name: "Verb-Preposition-Noun", structure: [['Verb', 'Preposition', 'Noun']]}, 
+  { name: "Verb-Preposition-Article-Noun", structure: [['Verb', 'Preposition', 'Article', 'Noun']]}, 
+  { name: "Noun-Preposition-Noun", structure: [['Noun', 'Preposition', 'Noun']]}, 
+  { name: "Article-Noun-Preposition-Article-Noun", structure: [['Article', 'Noun', 'Preposition', 'Article', 'Noun']]}, 
+  { name: "Pronoun-Verb-Adverb-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Adverb', 'Preposition', 'Article', 'Noun']]}, 
+  { name: "Pronoun-Verb-Noun-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Noun', 'Preposition', 'Article', 'Noun']] }, 
+  { name: "Article-Noun-Verb-Noun-Preposition-Article-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun', 'Preposition', 'Article', 'Noun']] }, 
+  { name: "Verb-Noun-Preposition-Noun", structure: [['Verb', 'Noun', 'Preposition', 'Noun']]}, 
+  { name: "Noun-Preposition-Article-Noun-Verb", structure: [['Noun', 'Preposition', 'Article', 'Noun', 'Verb']]}, 
+  { name: "Pronoun-Verb-Preposition-Pronoun", structure: [['Pronoun', 'Verb', 'Preposition', 'Pronoun']]},
 
   // Patterns with Conjunctions (linking clauses or words)
-  { name: "Noun-Verb-Conjunction-Noun-Verb", structure: [['Noun', 'Verb', 'Conjunction', 'Noun', 'Verb']] }, // Dogs bark and cats meow. Sun shines or rain falls.
-  { name: "Pronoun-Verb-Conjunction-Pronoun-Verb", structure: [['Pronoun', 'Verb', 'Conjunction', 'Pronoun', 'Verb']] }, // I run and he walks. She reads but they play.
-  { name: "Noun-Conjunction-Noun-Verb", structure: [['Noun', 'Conjunction', 'Noun', 'Verb']]}, // Cat and dog play. Bread or cheese is good.
-  { name: "Verb-Conjunction-Verb", structure: [['Verb', 'Conjunction', 'Verb']]}, // Run and jump. Eat or drink. (Imperative)
-  { name: "Adjective-Conjunction-Adjective", structure: [['Adjective', 'Conjunction', 'Adjective']]}, // Big and tall. Red or blue. (Fragment)
-  { name: "Noun-Verb-Noun-Conjunction-Verb-Noun", structure: [['Noun', 'Verb', 'Noun', 'Conjunction', 'Verb', 'Noun']] }, // Birds eat worms and drink water.
-  { name: "Pronoun-Verb-Adjective-Conjunction-Verb-Adjective", structure: [['Pronoun', 'Verb', 'Adjective', 'Conjunction', 'Verb', 'Adjective']] }, // He is happy but she is sad.
-  { name: "Article-Noun-Verb-Conjunction-Article-Noun-Verb", structure: [['Article', 'Noun', 'Verb', 'Conjunction', 'Article', 'Noun', 'Verb']] }, // The dog barks and the cat sleeps.
-  { name: "Adjective-Noun-Conjunction-Adjective-Noun-Verb", structure: [['Adjective', 'Noun', 'Conjunction', 'Adjective', 'Noun', 'Verb']]}, // Red cars and blue boats move.
-  { name: "Pronoun-Verb-Noun-Conjunction-Pronoun-Verb-Noun", structure: [['Pronoun', 'Verb', 'Noun', 'Conjunction', 'Pronoun', 'Verb', 'Noun']]}, // I like tea and he likes coffee.
-  { name: "Noun-Verb-Adjective-Conjunction-Noun-Verb-Adjective", structure: [['Noun', 'Verb', 'Adjective', 'Conjunction', 'Noun', 'Verb', 'Adjective']]}, // Day is bright and night is dark.
-  { name: "Verb-Noun-Conjunction-Verb-Noun", structure: [['Verb', 'Noun', 'Conjunction', 'Verb', 'Noun']]}, // Eat food and drink water.
+  { name: "Noun-Verb-Conjunction-Noun-Verb", structure: [['Noun', 'Verb', 'Conjunction', 'Noun', 'Verb']] }, 
+  { name: "Pronoun-Verb-Conjunction-Pronoun-Verb", structure: [['Pronoun', 'Verb', 'Conjunction', 'Pronoun', 'Verb']] }, 
+  { name: "Noun-Conjunction-Noun-Verb", structure: [['Noun', 'Conjunction', 'Noun', 'Verb']]}, 
+  { name: "Verb-Conjunction-Verb", structure: [['Verb', 'Conjunction', 'Verb']]}, 
+  { name: "Adjective-Conjunction-Adjective", structure: [['Adjective', 'Conjunction', 'Adjective']]}, 
+  { name: "Noun-Verb-Noun-Conjunction-Verb-Noun", structure: [['Noun', 'Verb', 'Noun', 'Conjunction', 'Verb', 'Noun']] }, 
+  { name: "Pronoun-Verb-Adjective-Conjunction-Verb-Adjective", structure: [['Pronoun', 'Verb', 'Adjective', 'Conjunction', 'Verb', 'Adjective']] }, 
+  { name: "Article-Noun-Verb-Conjunction-Article-Noun-Verb", structure: [['Article', 'Noun', 'Verb', 'Conjunction', 'Article', 'Noun', 'Verb']] }, 
+  { name: "Adjective-Noun-Conjunction-Adjective-Noun-Verb", structure: [['Adjective', 'Noun', 'Conjunction', 'Adjective', 'Noun', 'Verb']]}, 
+  { name: "Pronoun-Verb-Noun-Conjunction-Pronoun-Verb-Noun", structure: [['Pronoun', 'Verb', 'Noun', 'Conjunction', 'Pronoun', 'Verb', 'Noun']]}, 
+  { name: "Noun-Verb-Adjective-Conjunction-Noun-Verb-Adjective", structure: [['Noun', 'Verb', 'Adjective', 'Conjunction', 'Noun', 'Verb', 'Adjective']]}, 
+  { name: "Verb-Noun-Conjunction-Verb-Noun", structure: [['Verb', 'Noun', 'Conjunction', 'Verb', 'Noun']]},
 
   // Simple imperatives / fragments
-  { name: "Verb-Noun", structure: [['Verb', 'Noun']] }, // Eat food. Read book.
-  { name: "Verb-Pronoun", structure: [['Verb', 'Pronoun']] }, // Help them. See us.
-  { name: "Verb-Article-Noun", structure: [['Verb', 'Article', 'Noun']]}, // Take a break. Read the book.
-  { name: "Verb-Adjective-Noun", structure: [['Verb', 'Adjective', 'Noun']]}, // Find big treasure. Make good food.
-  { name: "Article-Noun", structure: [['Article', 'Noun']]}, // A cat. The sun. (Fragment)
+  { name: "Verb-Noun", structure: [['Verb', 'Noun']] }, 
+  { name: "Verb-Pronoun", structure: [['Verb', 'Pronoun']] }, 
+  { name: "Verb-Article-Noun", structure: [['Verb', 'Article', 'Noun']]}, 
+  { name: "Verb-Adjective-Noun", structure: [['Verb', 'Adjective', 'Noun']]}, 
+  { name: "Article-Noun", structure: [['Article', 'Noun']]},
 
   // Specific "to be" verb patterns (Is, Are, Was, Were, etc. are just 'Verb' category)
-  { name: "Noun-Is-Noun", structure: [['Noun', 'Verb', 'Noun']] }, // Max is a dog. Apples are fruit. (Verb would be 'is'/'are')
-  { name: "Article-Noun-Is-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun']] }, // The cat is an animal.
-  { name: "Pronoun-Is-Noun", structure: [['Pronoun', 'Verb', 'Noun']] }, // She is a doctor. It is a game.
-  { name: "Pronoun-Is-Article-Noun", structure: [['Pronoun', 'Verb', 'Article', 'Noun']] }, // He is a man. They are a team.
-  { name: "Article-Noun-Is-Adjective", structure: [['Article', 'Noun', 'Verb', 'Adjective']] }, // The car is red. An apple is sweet. (Covered by general S-V-Adj)
-  { name: "Adjective-Noun-Is-Adjective", structure: [['Adjective', 'Noun', 'Verb', 'Adjective']]}, // Big dog is friendly.
+  { name: "Article-Noun-Is-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun']] }, 
+  { name: "Pronoun-Is-Noun", structure: [['Pronoun', 'Verb', 'Noun']] }, 
+  { name: "Pronoun-Is-Article-Noun", structure: [['Pronoun', 'Verb', 'Article', 'Noun']] }, 
+  { name: "Adjective-Noun-Is-Adjective", structure: [['Adjective', 'Noun', 'Verb', 'Adjective']]},
   
   // More varied structures
-  { name: "Pronoun-Verb-Article-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Article', 'Adjective', 'Noun']]}, // I see a beautiful bird. We need a new plan.
-  { name: "Noun-Verb-Article-Adjective-Noun", structure: [['Noun', 'Verb', 'Article', 'Adjective', 'Noun']]}, // People want good weather.
-  { name: "Article-Adjective-Noun-Verb-Article-Noun", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Article', 'Noun']]}, // The old man tells a story.
-  { name: "Article-Noun-Adverb-Verb-Adjective", structure: [['Article', 'Noun', 'Adverb', 'Verb', 'Adjective']]}, // The sun always shines bright.
-  { name: "Pronoun-Adverb-Verb-Article-Noun", structure: [['Pronoun', 'Adverb', 'Verb', 'Article', 'Noun']]}, // She often reads a book.
-  { name: "Noun-Verb-Pronoun-Adverb", structure: [['Noun', 'Verb', 'Pronoun', 'Adverb']]}, // Children love them dearly.
-  { name: "Verb-Noun-Preposition-Article-Noun", structure: [['Verb', 'Noun', 'Preposition', 'Article', 'Noun']]}, // Take food to the party.
-  { name: "Article-Noun-Verb-Adjective-Preposition-Noun", structure: [['Article', 'Noun', 'Verb', 'Adjective', 'Preposition', 'Noun']]}, // The cat is content on bed.
-  { name: "Pronoun-Verb-Adverb-Adjective", structure: [['Pronoun', 'Verb', 'Adverb', 'Adjective']]}, // She is very happy. (e.g. is very happy)
-  { name: "Noun-Verb-Adverb-Adjective", structure: [['Noun', 'Verb', 'Adverb', 'Adjective']]}, // Food tastes really good.
+  { name: "Pronoun-Verb-Article-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Article', 'Adjective', 'Noun']]}, 
+  { name: "Noun-Verb-Article-Adjective-Noun", structure: [['Noun', 'Verb', 'Article', 'Adjective', 'Noun']]}, 
+  { name: "Article-Adjective-Noun-Verb-Article-Noun", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Article', 'Noun']]}, 
+  { name: "Article-Noun-Adverb-Verb-Adjective", structure: [['Article', 'Noun', 'Adverb', 'Verb', 'Adjective']]}, 
+  { name: "Pronoun-Adverb-Verb-Article-Noun", structure: [['Pronoun', 'Adverb', 'Verb', 'Article', 'Noun']]}, 
+  { name: "Noun-Verb-Pronoun-Adverb", structure: [['Noun', 'Verb', 'Pronoun', 'Adverb']]}, 
+  { name: "Verb-Noun-Preposition-Article-Noun", structure: [['Verb', 'Noun', 'Preposition', 'Article', 'Noun']]}, 
+  { name: "Article-Noun-Verb-Adjective-Preposition-Noun", structure: [['Article', 'Noun', 'Verb', 'Adjective', 'Preposition', 'Noun']]}, 
+  { name: "Pronoun-Verb-Adverb-Adjective", structure: [['Pronoun', 'Verb', 'Adverb', 'Adjective']]}, 
+  { name: "Noun-Verb-Adverb-Adjective", structure: [['Noun', 'Verb', 'Adverb', 'Adjective']]},
   
   // Longer and more complex combinations
-  { name: "Article-Adjective-Noun-Verb-Article-Adjective-Noun", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Article', 'Adjective', 'Noun']]}, // The small cat sees the big dog.
-  { name: "Pronoun-Verb-Noun-Preposition-Article-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Noun', 'Preposition', 'Article', 'Adjective', 'Noun']]}, // She put books in the big bag.
-  { name: "Article-Noun-Verb-Noun-Conjunction-Noun-Verb-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun', 'Conjunction', 'Noun', 'Verb', 'Noun']] }, // The boy reads books and the girl reads stories.
-  { name: "Pronoun-Verb-Adjective-Noun-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Adjective', 'Noun', 'Preposition', 'Article', 'Noun']] }, // I want a new game for the party.
-  { name: "Article-Noun-Verb-Adverb-Preposition-Article-Adjective-Noun", structure: [['Article', 'Noun', 'Verb', 'Adverb', 'Preposition', 'Article', 'Adjective', 'Noun']] }, // The cat jumped quickly over the tall fence.
-  { name: "Pronoun-Verb-Conjunction-Verb-Article-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Conjunction', 'Verb', 'Article', 'Adjective', 'Noun']] }, // I will sing and play a happy song.
-  { name: "Noun-Adverb-Verb-Adjective-Conjunction-Noun-Verb-Adverb", structure: [['Noun', 'Adverb', 'Verb', 'Adjective', 'Conjunction', 'Noun', 'Verb', 'Adverb']] }, // Early birds sing sweetly and late worms sleep soundly.
-  { name: "Pronoun-Verb-Article-Noun-Preposition-Article-Noun-Conjunction-Verb-More", structure: [['Pronoun', 'Verb', 'Article', 'Noun', 'Preposition', 'Article', 'Noun', 'Conjunction', 'Verb', 'Adverb']]}, // She took the book from the shelf and read more. (more is Adverb here)
+  { name: "Article-Adjective-Noun-Verb-Article-Adjective-Noun", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Article', 'Adjective', 'Noun']]}, 
+  { name: "Pronoun-Verb-Noun-Preposition-Article-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Noun', 'Preposition', 'Article', 'Adjective', 'Noun']]}, 
+  { name: "Article-Noun-Verb-Noun-Conjunction-Noun-Verb-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun', 'Conjunction', 'Noun', 'Verb', 'Noun']] }, 
+  { name: "Pronoun-Verb-Adjective-Noun-Preposition-Article-Noun", structure: [['Pronoun', 'Verb', 'Adjective', 'Noun', 'Preposition', 'Article', 'Noun']] }, 
+  { name: "Article-Noun-Verb-Adverb-Preposition-Article-Adjective-Noun", structure: [['Article', 'Noun', 'Verb', 'Adverb', 'Preposition', 'Article', 'Adjective', 'Noun']] }, 
+  { name: "Pronoun-Verb-Conjunction-Verb-Article-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Conjunction', 'Verb', 'Article', 'Adjective', 'Noun']] }, 
+  { name: "Noun-Adverb-Verb-Adjective-Conjunction-Noun-Verb-Adverb", structure: [['Noun', 'Adverb', 'Verb', 'Adjective', 'Conjunction', 'Noun', 'Verb', 'Adverb']] }, 
+  { name: "Pronoun-Verb-Article-Noun-Preposition-Article-Noun-Conjunction-Verb-More", structure: [['Pronoun', 'Verb', 'Article', 'Noun', 'Preposition', 'Article', 'Noun', 'Conjunction', 'Verb', 'Adverb']]}, 
 
   // User requested pattern
-  { name: "Adverb-Verb-Article-Adjective-Noun", structure: [['Adverb', 'Verb', 'Article', 'Adjective', 'Noun']]}, // Always judge a good party.
+  { name: "Adverb-Verb-Article-Adjective-Noun", structure: [['Adverb', 'Verb', 'Article', 'Adjective', 'Noun']]}, 
 
   // Additional complex patterns
-  { name: "Article-Noun-Verb-Noun-Preposition-Adjective-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun', 'Preposition', 'Adjective', 'Noun']]}, // The boy gave candy to happy children.
-  { name: "Pronoun-Verb-Adjective-Noun-Conjunction-Pronoun-Verb-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Adjective', 'Noun', 'Conjunction', 'Pronoun', 'Verb', 'Adjective', 'Noun']]}, // I like red cars and she likes blue bikes.
-  { name: "Noun-Verb-Preposition-Article-Noun-Adverb", structure: [['Noun', 'Verb', 'Preposition', 'Article', 'Noun', 'Adverb']]}, // People talk in the room loudly.
-  { name: "Pronoun-Verb-Noun-Preposition-Pronoun-Adverb", structure: [['Pronoun', 'Verb', 'Noun', 'Preposition', 'Pronoun', 'Adverb']]}, // She sent letters to them quickly.
-  { name: "Article-Adjective-Noun-Verb-Pronoun-Adverb", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Pronoun', 'Adverb']]}, // The fast car passed us suddenly.
-  { name: "Noun-Verb-Article-Adjective-Noun-Preposition-Noun", structure: [['Noun', 'Verb', 'Article', 'Adjective', 'Noun', 'Preposition', 'Noun']]}, // Artists paint a beautiful picture on canvas.
-  { name: "Adverb-Pronoun-Verb-Article-Noun-Conjunction-Verb-Adverb", structure: [['Adverb', 'Pronoun', 'Verb', 'Article', 'Noun', 'Conjunction', 'Verb', 'Adverb']]}, // Often I see a bird and sing happily.
-  { name: "Verb-Article-Noun-Preposition-Article-Adjective-Noun", structure: [['Verb', 'Article', 'Noun', 'Preposition', 'Article', 'Adjective', 'Noun']]}, // Take the key from the small box. (Imperative)
-  { name: "Pronoun-AuxVerb-Adverb-Verb-Noun", structure: [['Pronoun', 'Verb', 'Adverb', 'Verb', 'Noun']]}, // I will always remember you. (e.g. will is 'Verb', always 'Adverb', remember 'Verb', you 'Noun' or 'Pronoun' depending on 'You' card type)
-                                                                                                        // Simplified this to Pronoun-Verb(aux)-Adverb-Verb-Noun.
-                                                                                                        // Game uses 'Verb' for aux verbs like 'will', 'can', 'is'.
-  { name: "Article-Noun-Preposition-Article-Noun-Verb-Adverb", structure: [['Article', 'Noun', 'Preposition', 'Article', 'Noun', 'Verb', 'Adverb']]}, // The cat on the roof jumps silently.
-  { name: "Conjunction-Pronoun-Verb-Noun-Pronoun-Verb-Adjective", structure: [['Conjunction', 'Pronoun', 'Verb', 'Noun', 'Pronoun', 'Verb', 'Adjective']]}, // If you want food, I am ready.
-  { name: "Noun-Verb-Adjective-Preposition-Article-Noun-Adverb", structure: [['Noun', 'Verb', 'Adjective', 'Preposition', 'Article', 'Noun', 'Adverb']]}, // Stars shine bright in the sky always.
+  { name: "Article-Noun-Verb-Noun-Preposition-Adjective-Noun", structure: [['Article', 'Noun', 'Verb', 'Noun', 'Preposition', 'Adjective', 'Noun']]}, 
+  { name: "Pronoun-Verb-Adjective-Noun-Conjunction-Pronoun-Verb-Adjective-Noun", structure: [['Pronoun', 'Verb', 'Adjective', 'Noun', 'Conjunction', 'Pronoun', 'Verb', 'Adjective', 'Noun']]}, 
+  { name: "Noun-Verb-Preposition-Article-Noun-Adverb", structure: [['Noun', 'Verb', 'Preposition', 'Article', 'Noun', 'Adverb']]}, 
+  { name: "Pronoun-Verb-Noun-Preposition-Pronoun-Adverb", structure: [['Pronoun', 'Verb', 'Noun', 'Preposition', 'Pronoun', 'Adverb']]}, 
+  { name: "Article-Adjective-Noun-Verb-Pronoun-Adverb", structure: [['Article', 'Adjective', 'Noun', 'Verb', 'Pronoun', 'Adverb']]}, 
+  { name: "Noun-Verb-Article-Adjective-Noun-Preposition-Noun", structure: [['Noun', 'Verb', 'Article', 'Adjective', 'Noun', 'Preposition', 'Noun']]}, 
+  { name: "Adverb-Pronoun-Verb-Article-Noun-Conjunction-Verb-Adverb", structure: [['Adverb', 'Pronoun', 'Verb', 'Article', 'Noun', 'Conjunction', 'Verb', 'Adverb']]}, 
+  { name: "Verb-Article-Noun-Preposition-Article-Adjective-Noun", structure: [['Verb', 'Article', 'Noun', 'Preposition', 'Article', 'Adjective', 'Noun']]}, 
+  { name: "Pronoun-AuxVerb-Adverb-Verb-Noun", structure: [['Pronoun', 'Verb', 'Adverb', 'Verb', 'Noun']]},                                                                                                     
+  { name: "Article-Noun-Preposition-Article-Noun-Verb-Adverb", structure: [['Article', 'Noun', 'Preposition', 'Article', 'Noun', 'Verb', 'Adverb']]}, 
+  { name: "Conjunction-Pronoun-Verb-Noun-Pronoun-Verb-Adjective", structure: [['Conjunction', 'Pronoun', 'Verb', 'Noun', 'Pronoun', 'Verb', 'Adjective']]}, 
+  { name: "Noun-Verb-Adjective-Preposition-Article-Noun-Adverb", structure: [['Noun', 'Verb', 'Adjective', 'Preposition', 'Article', 'Noun', 'Adverb']]},
 
   // Question Form (Simple examples - "Is" and "Do" are categorized as 'Verb')
-  { name: "Verb-Pronoun-Verb-Noun", structure: [['Verb', 'Pronoun', 'Verb', 'Noun']]}, // Do you like games? Is she a doctor?
-  { name: "Verb-Article-Noun-Verb-Adjective", structure: [['Verb', 'Article', 'Noun', 'Verb', 'Adjective']]}, // Is the food really good?
-  { name: "Verb-Noun-Verb-Preposition-Noun", structure: [['Verb', 'Noun', 'Verb', 'Preposition', 'Noun']]}, // Do cats play with yarn?
-  { name: "Pronoun(Wh)-Verb-Pronoun-Verb", structure: [['Pronoun', 'Verb', 'Pronoun', 'Verb']]}, // Who are you playing? (Who is Pronoun)
+  { name: "Verb-Pronoun-Verb-Noun", structure: [['Verb', 'Pronoun', 'Verb', 'Noun']]}, 
+  { name: "Verb-Article-Noun-Verb-Adjective", structure: [['Verb', 'Article', 'Noun', 'Verb', 'Adjective']]}, 
+  { name: "Verb-Noun-Verb-Preposition-Noun", structure: [['Verb', 'Noun', 'Verb', 'Preposition', 'Noun']]}, 
+  { name: "Pronoun(Wh)-Verb-Pronoun-Verb", structure: [['Pronoun', 'Verb', 'Pronoun', 'Verb']]}, 
 
   // More Fragments
-  { name: "Adverb-Adjective", structure: [['Adverb', 'Adjective']]}, // Very good. Really fast.
-  { name: "Preposition-Article-Noun", structure: [['Preposition', 'Article', 'Noun']]}, // In the house. On a table.
-  { name: "Preposition-Noun", structure: [['Preposition', 'Noun']]}, // With friends. By car.
-  { name: "Adjective-Noun-Preposition-Noun", structure: [['Adjective', 'Noun', 'Preposition', 'Noun']]}, // Big dog in yard.
-  { name: "Article-Adjective-Noun-Preposition-Article-Noun", structure: [['Article', 'Adjective', 'Noun', 'Preposition', 'Article', 'Noun']]}, // The red book on the desk.
+  { name: "Adverb-Adjective", structure: [['Adverb', 'Adjective']]}, 
+  { name: "Preposition-Article-Noun", structure: [['Preposition', 'Article', 'Noun']]}, 
+  { name: "Preposition-Noun", structure: [['Preposition', 'Noun']]}, 
+  { name: "Adjective-Noun-Preposition-Noun", structure: [['Adjective', 'Noun', 'Preposition', 'Noun']]}, 
+  { name: "Article-Adjective-Noun-Preposition-Article-Noun", structure: [['Article', 'Adjective', 'Noun', 'Preposition', 'Article', 'Noun']]}, 
 
   // Patterns with multiple adjectives or adverbs
-  { name: "Article-Adjective-Adjective-Noun", structure: [['Article', 'Adjective', 'Adjective', 'Noun']]}, // The big red car.
-  { name: "Noun-Verb-Adverb-Adverb", structure: [['Noun', 'Verb', 'Adverb', 'Adverb']]}, // Dog runs very quickly.
-  { name: "Pronoun-Verb-Adjective-Adjective", structure: [['Pronoun', 'Verb', 'Adjective', 'Adjective']]}, // She is smart and kind. (if 'and' is missing, implies serial adjectives)
-  { name: "Adverb-Adverb-Verb", structure: [['Adverb', 'Adverb', 'Verb']]}, // Very quickly run.
+  { name: "Article-Adjective-Adjective-Noun", structure: [['Article', 'Adjective', 'Adjective', 'Noun']]}, 
+  { name: "Noun-Verb-Adverb-Adverb", structure: [['Noun', 'Verb', 'Adverb', 'Adverb']]}, 
+  { name: "Pronoun-Verb-Adjective-Adjective", structure: [['Pronoun', 'Verb', 'Adjective', 'Adjective']]}, 
+  { name: "Adverb-Adverb-Verb", structure: [['Adverb', 'Adverb', 'Verb']]}, 
 
   // Patterns emphasizing specific conjunction uses
-  { name: "Pronoun-Verb-Noun-Conjunction-Pronoun-Verb-Noun-Adverb", structure: [['Pronoun', 'Verb', 'Noun', 'Conjunction', 'Pronoun', 'Verb', 'Noun', 'Adverb']]}, // I like tea but he likes coffee more.
-  { name: "If-Pronoun-Verb-Then-Pronoun-Verb", structure: [['Conjunction', 'Pronoun', 'Verb', 'Conjunction', 'Pronoun', 'Verb']]}, // If you go, then I go. (Then is also a Conjunction or Adverb depending on context, using 'Conjunction' here for pattern)
-  { name: "Noun-Verb-Adjective-Because-Noun-Verb-Adjective", structure: [['Noun', 'Verb', 'Adjective', 'Conjunction', 'Noun', 'Verb', 'Adjective']]}, // Sky is blue because air is clean.
+  { name: "Pronoun-Verb-Noun-Conjunction-Pronoun-Verb-Noun-Adverb", structure: [['Pronoun', 'Verb', 'Noun', 'Conjunction', 'Pronoun', 'Verb', 'Noun', 'Adverb']]}, 
+  { name: "If-Pronoun-Verb-Then-Pronoun-Verb", structure: [['Conjunction', 'Pronoun', 'Verb', 'Conjunction', 'Pronoun', 'Verb']]}, 
+  { name: "Noun-Verb-Adjective-Because-Noun-Verb-Adjective", structure: [['Noun', 'Verb', 'Adjective', 'Conjunction', 'Noun', 'Verb', 'Adjective']]},
 
-  { name: "Article-Noun-Verb-Adverb-Preposition-Article-Adjective-Noun-Conjunction-Verb-Adverb", structure: [['Article', 'Noun', 'Verb', 'Adverb', 'Preposition', 'Article', 'Adjective', 'Noun', 'Conjunction', 'Verb', 'Adverb']]}, // The bird flew quickly over the green field and sang sweetly.
-  { name: "Pronoun-Verb-Article-Noun-While-Pronoun-Verb-Article-Noun", structure: [['Pronoun', 'Verb', 'Article', 'Noun', 'Conjunction', 'Pronoun', 'Verb', 'Article', 'Noun']]}, // I read a book while she watched a movie. (While is Conjunction)
-  { name: "Although-Noun-Verb-Adjective-Pronoun-Still-Verb-Noun", structure: [['Conjunction', 'Noun', 'Verb', 'Adjective', 'Pronoun', 'Adverb', 'Verb', 'Noun']]}, // Although food was cold, she still ate it. (Still is Adverb)
-
-  // Patterns involving "Unknown" should be avoided if possible, but as placeholders if truly needed:
-  // { name: "Noun-Verb-Unknown", structure: [['Noun', 'Verb', 'Unknown']] }, 
+  { name: "Article-Noun-Verb-Adverb-Preposition-Article-Adjective-Noun-Conjunction-Verb-Adverb", structure: [['Article', 'Noun', 'Verb', 'Adverb', 'Preposition', 'Article', 'Adjective', 'Noun', 'Conjunction', 'Verb', 'Adverb']]}, 
+  { name: "Pronoun-Verb-Article-Noun-While-Pronoun-Verb-Article-Noun", structure: [['Pronoun', 'Verb', 'Article', 'Noun', 'Conjunction', 'Pronoun', 'Verb', 'Article', 'Noun']]}, 
+  { name: "Although-Noun-Verb-Adjective-Pronoun-Still-Verb-Noun", structure: [['Conjunction', 'Noun', 'Verb', 'Adjective', 'Pronoun', 'Adverb', 'Verb', 'Noun']]},
 ];
 
 
@@ -581,3 +598,4 @@ export const SAME_LETTER_GROUP_MIN_LENGTH = 3;
 // If nanoid causes issues with server components/Next.js build, a simpler unique ID generator can be used.
 // For example: export const generateId = () => Math.random().toString(36).substr(2, 9);
 // But nanoid is generally fine.
+
