@@ -1,21 +1,23 @@
-# **App Name**: LexicaLabyrinth
+# **App Name**: LingoKub2
 
 ## Core Features:
 
-- Game Grid: Display a 5x8 game grid for card placement.
-- Card Drag and Drop: Enable drag-and-drop functionality for placing and moving word cards on the grid.
-- Player Hand: Render scrollable hand for each player.
-- Turn Management: Implement turn-based gameplay with clear indication of the current player.
-- Board Validation: Validate board state to ensure all cards form valid grammatical sentences or same-type groups.
-- Grammar Insight: Provide grammar insights to explain invalid word sequences and suggest corrections, powered by an LLM tool.
-- Pattern Highlighting: Highlight invalid patterns to show problematic words/sequences, with option to request and display sentence suggestions powered by LLM tool.
+- Game Grid: Implement a 5x8 game grid for word card placement.
+- Drag and Drop: Enable drag-and-drop functionality for placing and moving word cards on the grid.
+- Turn Management: Manage turns between players, with a clear indication of the current player's turn. Turns will be managed on the backend
+- Board Validation: Validate board configurations on the backend to ensure placed cards form valid grammatical structures or word groups.
+- Pattern Highlighting: Visually highlight invalid card placements on the game board.
+- Room Management: Handle player joining and room management. Initially support one room with a maximum of two players. Reject additional players with a 'game full' message.
+- Real-time Updates: Implement real-time streaming of game actions (card placements, moves) and chat messages between connected players.
+- Mascot Animation: Implement a cube mascot with an animated three-dot loading animation that appears when another player is taking their turn.
 
 ## Style Guidelines:
 
-- Primary color: Slate blue (#7395AE) to evoke a sense of intellect and strategy.
-- Background color: Light gray (#D3D3D3) for a neutral and clean game board.
-- Accent color: Coral (#E39577) to draw attention to actions and interactive elements.
-- Body and headline font: 'Inter', sans-serif, for a modern and readable interface.
-- Code font: 'Source Code Pro', monospace, for displaying AI grammar insight suggestions.
-- Use clear and minimalist icons from Lucide React to represent game actions and status.
-- Maintain a fluid and responsive layout that adapts to different screen sizes, using breakpoints defined in the prompt.
+- Primary color: Deep indigo (#4B0082) to evoke intellect and strategy.
+- Background color: Very light gray (#F0F0F0) for a clean, non-distracting surface.
+- Accent color: Lavender (#E6E6FA) to subtly highlight key interactive elements.
+- Body font: 'Inter' (sans-serif) for readability and a modern feel.
+- Headline font: 'Space Grotesk' (sans-serif) for emphasis and a techy look.
+- Use clean, minimalist icons to represent actions and game elements.
+- Implement subtle animations for card placement, turn transitions, and feedback cues.
+- The game's visual style should resemble the provided image, focusing on a clear and intuitive board layout, easily distinguishable card designs, and a user-friendly interface for chat and game controls.

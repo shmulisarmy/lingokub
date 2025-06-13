@@ -10,9 +10,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['Inter', 'sans-serif'],
-        code: ['"Source Code Pro"', 'monospace'],
+        body: ['var(--font-inter)', 'Inter', 'sans-serif'],
+        headline: ['var(--font-space-grotesk)', 'Space Grotesk', 'sans-serif'],
+        code: ['monospace'],
       },
       colors: {
         background: 'hsl(var(--background))',
@@ -88,17 +88,16 @@ export default {
             height: '0',
           },
         },
+        'dot-bounce': {
+          '0%, 80%, 100%': { transform: 'scale(0)' },
+          '40%': { transform: 'scale(1.0)' },
+        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'dot-bounce': 'dot-bounce 1.4s infinite ease-in-out both',
       },
-      gridTemplateColumns: {
-        '8': 'repeat(8, minmax(0, 1fr))',
-      },
-      gridTemplateRows: {
-        '5': 'repeat(5, minmax(0, 1fr))',
-      }
     },
   },
   plugins: [require('tailwindcss-animate')],

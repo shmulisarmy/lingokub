@@ -1,5 +1,1 @@
-import { config } from 'dotenv';
-config();
-
-import '@/ai/flows/grammar-insight.ts';
-import '@/ai/flows/sentence-suggestions.ts';
+// Flows will be imported for their side effects in this file.

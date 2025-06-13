@@ -1,48 +1,74 @@
-'use client';
 
-import type { WordCard as WordCardType, SelectedCardInfo } from '@/types';
-import { WordCard } from './word-card';
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+"use client";
+
+import React, { useState } from 'react'; // Changed from 'type React' to 'React, { useState }'
+import { WordCard } from "./word-card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import type { WordCardData } from '@/types';
+import { cn } from '@/lib/utils';
 
 interface PlayerHandProps {
-  hand: WordCardType[];
-  selectedCardInfo: SelectedCardInfo | null;
-  onCardSelect: (card: WordCardType, handIndex: number) => void;
-  onCardDragStart: (card: WordCardType, handIndex: number) => void;
-   setDraggedItem: (item: SelectedCardInfo | null) => void; // For global DND tracking
+  cards: WordCardData[];
+  isPlayerTurn: boolean;
+  onDragStartCard: (event: React.DragEvent<HTMLDivElement>, card: WordCardData) => void;
+  onDropCardToHandArea: (event: React.DragEvent<HTMLDivElement>) => void;
 }
 
-export function PlayerHand({ hand, selectedCardInfo, onCardSelect, onCardDragStart, setDraggedItem }: PlayerHandProps) {
-  if (!hand || hand.length === 0) {
-    return <div className="text-center p-4 text-muted-foreground">Hand is empty.</div>;
-  }
+export function PlayerHand({ cards, isPlayerTurn, onDragStartCard, onDropCardToHandArea }: PlayerHandProps) {
+  const [isDragOver, setIsDragOver] = useState(false); // Changed from React.useState to useState
+
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    if (isPlayerTurn) {
+      // Check if dragged item is from grid and can be returned
+      try {
+        const draggedItemData = JSON.parse(event.dataTransfer.getData('application/json'));
+        if (draggedItemData.source === 'grid') {
+          setIsDragOver(true);
+        }
+      } catch (e) {
+        // Not a valid JSON, or not our item
+      }
+    }
+  };
+
+  const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setIsDragOver(false);
+    if (isPlayerTurn) {
+      onDropCardToHandArea(event);
+    }
+  };
 
   return (
-    <ScrollArea className="w-full whitespace-nowrap rounded-md border bg-card shadow-lg">
-      <div className="flex space-x-2 p-4 min-h-[8rem] md:min-h-[10rem] items-center">
-        {hand.map((card, index) => (
+    <ScrollArea 
+      className={cn(
+        "h-full bg-accent/20 rounded-md p-2 transition-colors",
+        isDragOver && isPlayerTurn && "bg-primary/20 border-2 border-dashed border-primary"
+      )}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+      aria-label="Player's hand, droppable area for returning cards"
+    >
+      {cards.length === 0 && (
+        <p className="text-sm text-muted-foreground text-center py-4">Your hand is empty.</p>
+      )}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+        {cards.map((card) => (
           <WordCard
             key={card.id}
-            card={card}
-            isSelected={
-              selectedCardInfo?.source === 'hand' && selectedCardInfo.card.id === card.id
-            }
-            onClick={() => onCardSelect(card, index)}
-            draggable
-            onDragStart={(e) => {
-              const dragInfo: SelectedCardInfo = { card, source: 'hand', handIndex: index };
-              onCardDragStart(card, index); // This is from useGameLogic hook
-              setDraggedItem(dragInfo); // For global DND tracking if needed by page
-              if (e.dataTransfer) {
-                  e.dataTransfer.setData('application/json', JSON.stringify(dragInfo));
-                  e.dataTransfer.effectAllowed = "move";
-              }
-            }}
-            className="shrink-0"
+            wordData={card}
+            onDragStart={isPlayerTurn ? (e) => onDragStartCard(e, card) : undefined}
+            className={!isPlayerTurn ? "opacity-70 cursor-not-allowed" : ""}
           />
         ))}
       </div>
-      <ScrollBar orientation="horizontal" />
     </ScrollArea>
   );
 }

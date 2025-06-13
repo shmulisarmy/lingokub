@@ -1,62 +1,60 @@
-export type CardCategory = 
-  | 'Noun' 
-  | 'Verb' 
-  | 'Adjective' 
-  | 'Adverb' 
-  | 'Pronoun' 
-  | 'Article' 
-  | 'Preposition' 
-  | 'Conjunction'
-  | 'Unknown';
 
-export interface WordCard {
+export interface WordCardData {
   id: string;
+  word: string;
+}
+
+export type GridState = (WordCardData | null)[][];
+
+// Profile information for a player
+export interface PlayerProfile {
+  username: string;
+  avatarUrl: string;
+}
+
+// Structure for chat messages (payload for CHAT_MESSAGE type)
+export interface ChatMessageData {
+  id: string; 
+  sender: string; // playerId
   text: string;
-  categories: CardCategory[]; // Primary category first for coloring/grouping
+  timestamp: number;
 }
 
-export interface GridCell extends WordCard {
-  isNewThisTurn?: boolean;
-  placedByPlayerId?: string; // ID of the player who placed this card
-  originalHandIndex?: number; // To return to hand
-  validationState?: 'valid' | 'invalid' | 'neutral'; // For highlighting
+// Payload for profile updates
+export interface ProfileUpdatePayload {
+  playerId: string;
+  username: string;
+  avatarUrl: string;
 }
 
-export interface Player {
-  id: string;
-  name: string;
-  hand: WordCard[];
+// Wrapper for all WebSocket communications
+export type WebSocketMessageType = 
+  | 'CHAT_MESSAGE' 
+  | 'PROFILE_UPDATE' 
+  | 'ALL_PROFILES_UPDATE'
+  | 'SYSTEM_MESSAGE' // For server-side system messages like join/leave
+  | 'SET_INITIAL_TURN'; // For server to tell client if it's their turn initially
+
+export interface WebSocketMessage {
+  type: WebSocketMessageType;
+  payload: 
+    | ChatMessageData 
+    | ProfileUpdatePayload 
+    | Record<string, PlayerProfile> 
+    | { text: string }
+    | { isMyTurn: boolean };
 }
 
-export interface SelectedCardInfo {
-  card: WordCard;
-  source: 'hand' | 'board';
-  handIndex?: number;
-  boardCoordinates?: { row: number; col: number };
+export interface DraggedItemInfo {
+  card: WordCardData;
+  source: 'hand' | 'grid';
+  sourceRow?: number; 
+  sourceCol?: number; 
 }
 
-export interface ValidationIssue {
-  rowIndex: number;
-  startCol: number;
-  endCol: number;
-  message: string;
-  type: 'isolated' | 'pattern';
+export interface CardPlacedThisTurn {
+  cardId: string; 
+  originalRowOnGrid: number; 
+  originalColOnGrid: number; 
 }
 
-export interface GameState {
-  players: [Player, Player];
-  currentPlayerIndex: 0 | 1;
-  gameBoard: (GridCell | null)[][]; // 5 rows, 8 columns
-  isGameWon: boolean;
-  selectedCardInfo: SelectedCardInfo | null;
-  actionsThisTurn: number; // Number of cards placed/moved this turn
-  winner: Player | null;
-  deck: WordCard[];
-  turnMessages: string[]; // For feedback like "Invalid move"
-  highlightedIssues: ValidationIssue[];
-}
-
-export interface SentencePattern {
-  name: string;
-  structure: CardCategory[][]; // Array of possible category sequences
-}
