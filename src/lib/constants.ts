@@ -1,3 +1,5 @@
+// "use server"
+
 
 import type { WordCard, CardCategory, SentencePattern } from '@/types';
 import { nanoid } from 'nanoid';

@@ -34,6 +34,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
   const handleSelectOpenChange = (index: number, isOpen: boolean) => {
     const newOpenStates = [...selectOpenStates];
     if (isOpen) {
+      //? why not just do 'newOpenStates[index] = true;'
       for (let i = 0; i < newOpenStates.length; i++) {
         newOpenStates[i] = i === index;
       }

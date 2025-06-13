@@ -12,6 +12,13 @@ import { useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
 import { DevPanel } from '@/components/dev-panel';
+import { MessagingBox } from './messages';
+
+
+
+
+
+
 
 
 export default function LexicaLabyrinthPage() {
@@ -128,6 +135,7 @@ export default function LexicaLabyrinthPage() {
         <h1 className="text-3xl md:text-4xl font-bold text-center text-primary font-headline mb-2">
           LexicaLabyrinth
         </h1>
+        <MessagingBox/>
         <StatusDisplay
           currentPlayer={currentPlayer}
           players={players}
